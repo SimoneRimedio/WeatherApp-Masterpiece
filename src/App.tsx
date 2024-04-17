@@ -4,16 +4,34 @@ import { Tokens } from './utils/env';
 import useFetch from './hooks/useFetch';
 import weatherApi from './utils/weatherApi';
 import Card from './components/Card';
+import data from '../public/weather.json';
+
+interface WeatherJSONProps {
+  description: string;
+  image: string;
+}
+
+interface WeatherDataJSON {
+  [key: string]: {
+    day: WeatherJSONProps;
+    night: WeatherJSONProps;
+  };
+}
 
 type Location = string;
 
 const App = (): ReactElement => {
   const [weatherData, setWeatherData] = useState<WeatherData>();
   const [currentLocation, setCurrentLocation] = useState<Location>('');
+  const [weatherJSON, setWeatherJSON] = useState<WeatherJSONProps>();
 
   const getWeatherData = async ({ latitude, longitude }: GetWeatherProps): Promise<void> => {
     const weatherData = await weatherApi({ latitude: latitude, longitude: longitude });
     setWeatherData(weatherData);
+
+    const code = weatherData.current.weatherCode ?? '0'; 
+    const currentWeather = (data as WeatherDataJSON)[code];
+    setWeatherJSON({ description: currentWeather.day.description || currentWeather.night.description || '', image: currentWeather.day.image || currentWeather.night.image || '' });
   };
 
   const handleInput = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -22,7 +40,6 @@ const App = (): ReactElement => {
 
   const handleLocation = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
-
     const pos = await useFetch({ url: `https://geocode.maps.co/search?q=${currentLocation}&api_key=${Tokens.GeocodeToken}` });
     await getWeatherData({ latitude: pos.data[0].lat, longitude: pos.data[0].lon });
   };
@@ -50,6 +67,10 @@ const App = (): ReactElement => {
         </svg>
       </button>
     </form>
+    <div className="flex justify-center items-center mt-10">
+      <img src={weatherJSON?.image} alt='weatherIcon'/>
+      <h1>{weatherJSON?.description}</h1>
+    </div>
     <div className="flex justify-center mt-10">
       {weatherData && <Card elements={weatherData.current}></Card>}
     </div>
