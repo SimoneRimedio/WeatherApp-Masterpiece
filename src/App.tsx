@@ -3,10 +3,13 @@ import { GetWeatherProps, WeatherData } from './types/types';
 import { Tokens } from './utils/env';
 import useFetch from './hooks/useFetch';
 import weatherApi from './utils/weatherApi';
-import Card from './components/Card';
+import CurrentCard from './components/CurrentCard';
+import HourlyCard from './components/HourlyCard';
+//import DailyCard from './components/DailyCard';
 import data from '../public/weather.json';
 import { IconSearch } from '@tabler/icons-react';
 import cardinalConv from './utils/cardinalConversion';
+
 
 interface WeatherJSONProps {
   description: string;
@@ -32,8 +35,13 @@ const App = (): ReactElement => {
     setWeatherData(weatherData);
 
     const code = weatherData.current.weatherCode ?? '0'; 
+    const isDay = weatherData.current.isDay;
     const currentWeather = (data as WeatherDataJSON)[code];
-    setWeatherJSON({ description: currentWeather.day.description || currentWeather.night.description || '', image: currentWeather.day.image || currentWeather.night.image || '' });
+    
+    const description = isDay === 1 ? currentWeather.day.description : currentWeather.night.description;
+    const image = isDay === 1 ? currentWeather.day.image : currentWeather.night.image;
+
+    setWeatherJSON({ description: description || '', image: image || '' });
   };
 
   const handleInput = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -59,10 +67,12 @@ const App = (): ReactElement => {
     }
   }, []);
 
+  const caca = new Date;
+
   return (
   <>
-  <header></header>
-    <form className='flex items-center' onSubmit={handleLocation}>
+  <header className='flex items-center align-center'>
+    <form className='flex items-center mx-auto mt-10' onSubmit={handleLocation}>
       <input 
         type='text' 
         className='py-2 px-3 w-64 border rounded-lg border-stone-700 text-gray-600' 
@@ -72,17 +82,26 @@ const App = (): ReactElement => {
       />
       <button type="submit" className="ml-2"><IconSearch /></button>
     </form>
+    </header>
     <div className="flex justify-center items-center mt-10">
       <img src={weatherJSON?.image} alt="weatherIcon" className="w-30 h-30 mr-2" />
       <h1 className="text-xl">{weatherJSON?.description}</h1>
     </div>
     <div className="flex justify-center mt-10 space-x-4 text-center">
-      <Card title="Temperature" content={`${parseInt(String(weatherData?.current.temperature2m))} °C`}></Card>
-      <Card title="Humidity" content={`${parseInt(String(weatherData?.current.relativeHumidity2m))} %`}></Card>
-      <Card title="Apparent Temperature" content={`${parseInt(String(weatherData?.current.apparentTemperature))} °C`}></Card>
-      <Card title="Pressure" content={`${parseInt(String(weatherData?.current.surfacePressure))} mbar`}></Card>
-      <Card title="Wind Direction" content={cardinalConv(weatherData?.current.windDirection10m ?? 0)}></Card>
-      <Card title="Wind Speed" content={`${parseInt(String(weatherData?.current.windSpeed10m))} Km/h`}></Card>
+      <CurrentCard title="Temperature" content={`${parseInt(String(weatherData?.current.temperature2m))} °C`}></CurrentCard>
+      <CurrentCard title="Humidity" content={`${parseInt(String(weatherData?.current.relativeHumidity2m))} %`}></CurrentCard>
+      <CurrentCard title="Apparent Temperature" content={`${parseInt(String(weatherData?.current.apparentTemperature))} °C`}></CurrentCard>
+      <CurrentCard title="Pressure" content={`${parseInt(String(weatherData?.current.surfacePressure))} mbar`}></CurrentCard>
+      <CurrentCard title="Wind Direction" content={cardinalConv(weatherData?.current.windDirection10m ?? 0)}></CurrentCard>
+      <CurrentCard title="Wind Speed" content={`${parseInt(String(weatherData?.current.windSpeed10m))} Km/h`}></CurrentCard>
+    </div>
+    <div className='flex justify-center items-center mt-10'>
+     <HourlyCard 
+      time={caca} 
+      temp={`${parseInt(String(weatherData?.hourly.temperature2m))}`} 
+      prob={`${parseInt(String(weatherData?.hourly.precipitationProbability))}`} 
+      wind={`${parseInt(String(weatherData?.hourly.windSpeed10m))}`}
+     ></HourlyCard>
     </div>
     <footer></footer>
   </>

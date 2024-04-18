@@ -27,4 +27,5 @@ export type WeatherDataType = {
   surfacePressure?: number;
   windSpeed10m?: number | Float32Array;
   windDirection10m?: number;
+  isDay?: number;
 }

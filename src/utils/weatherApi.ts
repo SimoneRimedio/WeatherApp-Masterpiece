@@ -6,7 +6,7 @@ const weatherApi = async ({ latitude, longitude }: GetWeatherProps): Promise<Wea
     'latitude': latitude,
     'longitude': longitude,
     'timezone': 'auto',
-    'current': ['temperature_2m', 'relative_humidity_2m', 'apparent_temperature', 'precipitation', 'rain', 'showers', 'snowfall', 'weather_code', 'cloud_cover', 'surface_pressure', 'wind_speed_10m', 'wind_direction_10m'],
+    'current': ['temperature_2m', 'relative_humidity_2m', 'apparent_temperature', 'precipitation', 'rain', 'showers', 'snowfall', 'weather_code', 'cloud_cover', 'surface_pressure', 'wind_speed_10m', 'wind_direction_10m',"is_day"],
     'hourly': ['temperature_2m', 'precipitation_probability', 'precipitation', 'wind_speed_10m'],
     'daily': ['temperature_2m_max', 'temperature_2m_min', 'precipitation_probability_max'],
   };
@@ -36,6 +36,7 @@ const weatherApi = async ({ latitude, longitude }: GetWeatherProps): Promise<Wea
       surfacePressure: current.variables(9)!.value(),
       windSpeed10m: current.variables(10)!.value(),
       windDirection10m: current.variables(11)!.value(),
+      isDay: current.variables(0)!.value(),
     },
 
     hourly: {

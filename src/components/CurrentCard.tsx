@@ -5,7 +5,7 @@ interface CardProps {
   content: string | number | undefined;
 }
 
-const Card = ({ title, content }: CardProps): ReactElement => {
+const CurrentCard = ({ title, content }: CardProps): ReactElement => {
   return (
     <div className="bg-white rounded-lg shadow-md p-4 w-48">
         <p className="text-sm mb-2 text-black">{title}</p>
@@ -14,4 +14,4 @@ const Card = ({ title, content }: CardProps): ReactElement => {
   );
 };
 
-export default Card;
+export default CurrentCard;
