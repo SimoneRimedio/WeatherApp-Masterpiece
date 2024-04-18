@@ -10,7 +10,7 @@ export interface WeatherData {
 }
 
 export type WeatherDataType = {
-  time: Date | Date[];
+  time: Date | Date[] | string[];
   temperature2m?: number | Float32Array;
   temperature2mMin?: Float32Array;
   temperature2mMax?: Float32Array;

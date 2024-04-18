@@ -52,6 +52,7 @@ const weatherApi = async ({ latitude, longitude }: GetWeatherProps): Promise<Wea
       temperature2mMax: daily.variables(0)!.valuesArray()!,
       temperature2mMin: daily.variables(1)!.valuesArray()!,
       precipitationProbabilityMax: daily.variables(2)!.valuesArray()!,
+
     },
   };
   

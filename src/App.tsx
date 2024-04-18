@@ -4,11 +4,13 @@ import { Tokens } from './utils/env';
 import useFetch from './hooks/useFetch';
 import weatherApi from './utils/weatherApi';
 import CurrentCard from './components/CurrentCard';
-import HourlyCard from './components/HourlyCard';
+//import HourlyCard from './components/HourlyCard';
 //import DailyCard from './components/DailyCard';
 import data from '../public/weather.json';
 import { IconSearch } from '@tabler/icons-react';
 import cardinalConv from './utils/cardinalConversion';
+import DailyCard from './components/DailyCard';
+
 
 
 interface WeatherJSONProps {
@@ -33,6 +35,8 @@ const App = (): ReactElement => {
   const getWeatherData = async ({ latitude, longitude }: GetWeatherProps): Promise<void> => {
     const weatherData = await weatherApi({ latitude: latitude, longitude: longitude });
     setWeatherData(weatherData);
+
+    console.log(weatherData.daily)
 
     const code = weatherData.current.weatherCode ?? '0'; 
     const isDay = weatherData.current.isDay;
@@ -67,8 +71,6 @@ const App = (): ReactElement => {
     }
   }, []);
 
-  const caca = new Date;
-
   return (
   <>
   <header className='flex items-center align-center'>
@@ -95,13 +97,10 @@ const App = (): ReactElement => {
       <CurrentCard title="Wind Direction" content={cardinalConv(weatherData?.current.windDirection10m ?? 0)}></CurrentCard>
       <CurrentCard title="Wind Speed" content={`${parseInt(String(weatherData?.current.windSpeed10m))} Km/h`}></CurrentCard>
     </div>
-    <div className='flex justify-center items-center mt-10'>
-     <HourlyCard 
-      time={caca} 
-      temp={`${parseInt(String(weatherData?.hourly.temperature2m))}`} 
-      prob={`${parseInt(String(weatherData?.hourly.precipitationProbability))}`} 
-      wind={`${parseInt(String(weatherData?.hourly.windSpeed10m))}`}
-     ></HourlyCard>
+    <div className="flex justify-center mt-10 space-x-4 text-center">
+      <DailyCard
+       time={weatherData?.daily.time}
+      ></DailyCard>
     </div>
     <footer></footer>
   </>
