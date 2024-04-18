@@ -5,6 +5,8 @@ import useFetch from './hooks/useFetch';
 import weatherApi from './utils/weatherApi';
 import Card from './components/Card';
 import data from '../public/weather.json';
+import { IconSearch } from '@tabler/icons-react';
+import cardinalConv from './utils/cardinalConversion';
 
 interface WeatherJSONProps {
   description: string;
@@ -58,23 +60,32 @@ const App = (): ReactElement => {
   }, []);
 
   return (
-    <>
-    <form className='flex max-w-md px-4 mx-auto mt-12' onSubmit={handleLocation}>
-      <input type='text' className='w-60 p-3 text-gray-500 border rounded-md outline-none bg-gray-50 focus:bg-white focus:border-indigo-600' value={currentLocation} onChange={handleInput} /> 
-      <button type='submit' className='border-1 border-gray-600 rounded-md relative'>
-        <svg xmlns="http://www.w3.org/2000/svg" className="absolute top-0 bottom-0 w-6 h-6 my-auto text-gray-400 left-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-      </button>
+  <>
+  <header></header>
+    <form className='flex items-center' onSubmit={handleLocation}>
+      <input 
+        type='text' 
+        className='py-2 px-3 w-64 border rounded-lg border-stone-700 text-gray-600' 
+        placeholder="Enter location..."
+        value={currentLocation} 
+        onChange={handleInput} 
+      />
+      <button type="submit" className="ml-2"><IconSearch /></button>
     </form>
     <div className="flex justify-center items-center mt-10">
-      <img src={weatherJSON?.image} alt='weatherIcon'/>
-      <h1>{weatherJSON?.description}</h1>
+      <img src={weatherJSON?.image} alt="weatherIcon" className="w-30 h-30 mr-2" />
+      <h1 className="text-xl">{weatherJSON?.description}</h1>
     </div>
-    <div className="flex justify-center mt-10">
-      {weatherData && <Card elements={weatherData.current}></Card>}
+    <div className="flex justify-center mt-10 space-x-4 text-center">
+      <Card title="Temperature" content={`${parseInt(String(weatherData?.current.temperature2m))} °C`}></Card>
+      <Card title="Humidity" content={`${parseInt(String(weatherData?.current.relativeHumidity2m))} %`}></Card>
+      <Card title="Apparent Temperature" content={`${parseInt(String(weatherData?.current.apparentTemperature))} °C`}></Card>
+      <Card title="Pressure" content={`${parseInt(String(weatherData?.current.surfacePressure))} mbar`}></Card>
+      <Card title="Wind Direction" content={cardinalConv(weatherData?.current.windDirection10m ?? 0)}></Card>
+      <Card title="Wind Speed" content={`${parseInt(String(weatherData?.current.windSpeed10m))} Km/h`}></Card>
     </div>
-    </>
+    <footer></footer>
+  </>
   );
 };
 

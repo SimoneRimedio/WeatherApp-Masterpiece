@@ -1,21 +1,15 @@
 import { ReactElement } from 'react';
 
-interface CardProps<T> {
-  elements: T | undefined;
+interface CardProps {
+  title: string;
+  content: string | number | undefined;
 }
 
-const Card = <T,>({ elements }: CardProps<T>): ReactElement => {
+const Card = ({ title, content }: CardProps): ReactElement => {
   return (
-    <div>
-      {elements && (
-        <div>
-          {Object.entries(elements).map(([key, value], index) => (
-            <div key={index}>
-              <div>{key}: {String(value)}</div>
-            </div>
-          ))}
-        </div>
-      )}
+    <div className="bg-white rounded-lg shadow-md p-4 w-48">
+        <p className="text-sm mb-2 text-black">{title}</p>
+        <h1 className="text-md text-gray-600 font-bold">{content}</h1>
     </div>
   );
 };
