@@ -10,6 +10,7 @@ import data from '../public/weather.json';
 import { IconSearch } from '@tabler/icons-react';
 import cardinalConv from './utils/cardinalConversion';
 import DailyCard from './components/DailyCard';
+import HourlyCard from './components/HourlyCard';
 
 
 
@@ -36,7 +37,7 @@ const App = (): ReactElement => {
     const weatherData = await weatherApi({ latitude: latitude, longitude: longitude });
     setWeatherData(weatherData);
 
-    console.log(weatherData.daily)
+    console.log(weatherData.hourly)
 
     const code = weatherData.current.weatherCode ?? '0'; 
     const isDay = weatherData.current.isDay;
@@ -97,11 +98,10 @@ const App = (): ReactElement => {
       <CurrentCard title="Wind Direction" content={cardinalConv(weatherData?.current.windDirection10m ?? 0)}></CurrentCard>
       <CurrentCard title="Wind Speed" content={`${parseInt(String(weatherData?.current.windSpeed10m))} Km/h`}></CurrentCard>
     </div>
-    <div className="flex justify-center mt-10 space-x-4 text-center">
-      <DailyCard
-       time={weatherData?.daily.time}
-      ></DailyCard>
-    </div>
+    <h1 className='text-4xl font-extrabold dark:text-white flex justify-center mt-10'>Hourly Weather</h1>
+      {weatherData && <HourlyCard data={weatherData.hourly}></HourlyCard>}
+    <h1 className='text-4xl font-extrabold dark:text-white flex justify-center mt-10'>Week Weather</h1>
+      {weatherData && <DailyCard data={weatherData.daily}></DailyCard>}
     <footer></footer>
   </>
   );

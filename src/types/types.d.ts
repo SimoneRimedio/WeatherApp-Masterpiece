@@ -11,7 +11,7 @@ export interface WeatherData {
 
 export type WeatherDataType = {
   time: Date | Date[] | string[];
-  temperature2m?: number | Float32Array;
+  temperature2m?: Float32Array;
   temperature2mMin?: Float32Array;
   temperature2mMax?: Float32Array;
   relativeHumidity2m?: number;
@@ -25,7 +25,7 @@ export type WeatherDataType = {
   weatherCode?: number;
   cloudCover?: number;
   surfacePressure?: number;
-  windSpeed10m?: number | Float32Array;
+  windSpeed10m?: Float32Array;
   windDirection10m?: number;
   isDay?: number;
 }
