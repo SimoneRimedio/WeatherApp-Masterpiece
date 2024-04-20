@@ -17,7 +17,7 @@ const DailyCard = ({ data }: DailyCardProps): ReactElement => {
     const seriesDiv = (
       <div key={i} className='bg-white rounded-lg shadow-md p-4 w-48 text-black'>
         <h1>{String(time && time[i]).substring(0,3)}</h1>
-        <p>Temperature: {parseInt(String(temp_min && temp_min[i]))}°/ {parseInt(String(temp_max && temp_max[i]))}°</p>
+        <p>Temperature: {parseInt(String(temp_min && temp_min[i]))}° / {parseInt(String(temp_max && temp_max[i]))}°</p>
         <p>Precipitation: {parseInt(String(prob_max && prob_max[i]))} %</p>
       </div>
     );

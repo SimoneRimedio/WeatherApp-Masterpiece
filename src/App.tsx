@@ -34,13 +34,15 @@ const App = (): ReactElement => {
   const getWeatherData = async ({ latitude, longitude }: GetWeatherProps): Promise<void> => {
     const weatherData = await weatherApi({ latitude: latitude, longitude: longitude });
     setWeatherData(weatherData);
-
-    const code = weatherData.current.weatherCode ?? '0'; 
-    const isDay = weatherData.current.isDay;
-    const currentWeather = (data as WeatherDataJSON)[code];
     
-    const description = isDay === 1 ? currentWeather.day.description : currentWeather.night.description;
-    const image = isDay === 1 ? currentWeather.day.image : currentWeather.night.image;
+    const code = weatherData.current.weatherCode ?? '0'; 
+    const currentWeather = (data as WeatherDataJSON)[code];
+
+    const hours = new Date().getHours()
+    const isDayTime = hours > 6 && hours < 20
+    
+    const description = isDayTime ? currentWeather.day.description : currentWeather.night.description;
+    const image = isDayTime ? currentWeather.day.image : currentWeather.night.image;
 
     setWeatherJSON({ description: description || '', image: image || '' });
   };
