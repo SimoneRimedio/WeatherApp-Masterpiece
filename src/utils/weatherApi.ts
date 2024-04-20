@@ -37,6 +37,7 @@ const weatherApi = async ({ latitude, longitude }: GetWeatherProps): Promise<Wea
       windSpeed10m: current.variables(10)!.value(),
       windDirection10m: current.variables(11)!.value(),
       isDay: current.variables(0)!.value(),
+      keys: undefined
     },
 
     hourly: {
@@ -45,6 +46,7 @@ const weatherApi = async ({ latitude, longitude }: GetWeatherProps): Promise<Wea
       precipitationProbability: hourly.variables(1)!.valuesArray()!,
       precipitation: hourly.variables(2)!.valuesArray()!,
       windSpeed10m: hourly.variables(3)!.valuesArray()!,
+      keys: undefined
     },
 
     daily: {
@@ -52,7 +54,7 @@ const weatherApi = async ({ latitude, longitude }: GetWeatherProps): Promise<Wea
       temperature2mMax: daily.variables(0)!.valuesArray()!,
       temperature2mMin: daily.variables(1)!.valuesArray()!,
       precipitationProbabilityMax: daily.variables(2)!.valuesArray()!,
-
+      keys: undefined
     },
   };
   

@@ -7,9 +7,9 @@ interface DailyCardProps {
 
 const DailyCard = ({ data }: DailyCardProps): ReactElement => {
   const time = Array.isArray(data.time) && data.time.length > 0 ? data.time : null;
-  const tMin = data.temperature2mMin ?? null;
-  const tMax = data.temperature2mMax ?? null;
-  const probMax = data.precipitationProbabilityMax ?? null;
+  const temp_min = data.temperature2mMin ?? null;
+  const temp_max = data.temperature2mMax ?? null;
+  const prob_max = data.precipitationProbabilityMax ?? null;
 
   const series: JSX.Element[] = [];
 
@@ -17,12 +17,12 @@ const DailyCard = ({ data }: DailyCardProps): ReactElement => {
     const seriesDiv = (
       <div key={i} className='bg-white rounded-lg shadow-md p-4 w-48 text-black'>
         <h1>{String(time && time[i]).substring(0,3)}</h1>
-        <p>Temperature: {parseInt(String(tMin && tMin[i]))}°/ {parseInt(String(tMax && tMax[i]))}°</p>
-        <p>Precipitation Probability: {parseInt(String(probMax && probMax[i]))} %</p>
+        <p>Temperature: {parseInt(String(temp_min && temp_min[i]))}°/ {parseInt(String(temp_max && temp_max[i]))}°</p>
+        <p>Precipitation: {parseInt(String(prob_max && prob_max[i]))} %</p>
       </div>
     );
     series.push(seriesDiv);
-  }
+  };
 
 
   return (

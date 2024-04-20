@@ -3,7 +3,7 @@ da fare:
 creare i components
 aggiungere qualità dell'aria
 aggiungere tema modificabile
-aggiungere conversione unità di misura
+aggiungere conversione unità di misura (opzionale)
 aggiungere footer
 
 completate:

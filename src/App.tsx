@@ -3,15 +3,12 @@ import { GetWeatherProps, WeatherData } from './types/types';
 import { Tokens } from './utils/env';
 import useFetch from './hooks/useFetch';
 import weatherApi from './utils/weatherApi';
-import CurrentCard from './components/CurrentCard';
-//import HourlyCard from './components/HourlyCard';
-//import DailyCard from './components/DailyCard';
 import data from '../public/weather.json';
 import { IconSearch } from '@tabler/icons-react';
-import cardinalConv from './utils/cardinalConversion';
+
+import CurrentCard from './components/CurrentCard';
 import DailyCard from './components/DailyCard';
 import HourlyCard from './components/HourlyCard';
-
 
 
 interface WeatherJSONProps {
@@ -36,8 +33,6 @@ const App = (): ReactElement => {
   const getWeatherData = async ({ latitude, longitude }: GetWeatherProps): Promise<void> => {
     const weatherData = await weatherApi({ latitude: latitude, longitude: longitude });
     setWeatherData(weatherData);
-
-    console.log(weatherData.hourly)
 
     const code = weatherData.current.weatherCode ?? '0'; 
     const isDay = weatherData.current.isDay;
@@ -90,17 +85,10 @@ const App = (): ReactElement => {
       <img src={weatherJSON?.image} alt="weatherIcon" className="w-30 h-30 mr-2" />
       <h1 className="text-xl">{weatherJSON?.description}</h1>
     </div>
-    <div className="flex justify-center mt-10 space-x-4 text-center">
-      <CurrentCard title="Temperature" content={`${parseInt(String(weatherData?.current.temperature2m))} °C`}></CurrentCard>
-      <CurrentCard title="Humidity" content={`${parseInt(String(weatherData?.current.relativeHumidity2m))} %`}></CurrentCard>
-      <CurrentCard title="Apparent Temperature" content={`${parseInt(String(weatherData?.current.apparentTemperature))} °C`}></CurrentCard>
-      <CurrentCard title="Pressure" content={`${parseInt(String(weatherData?.current.surfacePressure))} mbar`}></CurrentCard>
-      <CurrentCard title="Wind Direction" content={cardinalConv(weatherData?.current.windDirection10m ?? 0)}></CurrentCard>
-      <CurrentCard title="Wind Speed" content={`${parseInt(String(weatherData?.current.windSpeed10m))} Km/h`}></CurrentCard>
-    </div>
-    <h1 className='text-4xl font-extrabold dark:text-white flex justify-center mt-10'>Hourly Weather</h1>
+      {weatherData && <CurrentCard data={weatherData.current}></CurrentCard>}
+    <h1 className='text-4xl font-extrabold dark:text-black flex justify-center mt-10'>Hourly Weather</h1>
       {weatherData && <HourlyCard data={weatherData.hourly}></HourlyCard>}
-    <h1 className='text-4xl font-extrabold dark:text-white flex justify-center mt-10'>Week Weather</h1>
+    <h1 className='text-4xl font-extrabold dark:text-black flex justify-center mt-10'>Week Weather</h1>
       {weatherData && <DailyCard data={weatherData.daily}></DailyCard>}
     <footer></footer>
   </>
