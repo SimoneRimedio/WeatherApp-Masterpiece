@@ -10,7 +10,6 @@ import CurrentCard from './components/CurrentCard';
 import DailyCard from './components/DailyCard';
 import HourlyCard from './components/HourlyCard';
 
-
 interface WeatherJSONProps {
   description: string;
   image: string;
@@ -29,6 +28,8 @@ const App = (): ReactElement => {
   const [weatherData, setWeatherData] = useState<WeatherData>();
   const [currentLocation, setCurrentLocation] = useState<Location>('');
   const [weatherJSON, setWeatherJSON] = useState<WeatherJSONProps>();
+  const [showHourly, setShowHourly] = useState(false);
+  const [showDaily, setShowDaily] = useState(false);
 
   const getWeatherData = async ({ latitude, longitude }: GetWeatherProps): Promise<void> => {
     const weatherData = await weatherApi({ latitude: latitude, longitude: longitude });
@@ -67,31 +68,67 @@ const App = (): ReactElement => {
     }
   }, []);
 
+  const handleHourlyButtonClick = () => {
+    setShowHourly(true);
+    setShowDaily(false);
+  };
+
+  const handleDailyButtonClick = () => {
+    setShowHourly(false);
+    setShowDaily(true);
+  };
+
   return (
-  <>
-  <header className='flex items-center align-center'>
-    <form className='flex items-center mx-auto mt-10' onSubmit={handleLocation}>
-      <input 
-        type='text' 
-        className='py-2 px-3 w-64 border rounded-lg border-stone-700 text-gray-600' 
-        placeholder="Enter location..."
-        value={currentLocation} 
-        onChange={handleInput} 
-      />
-      <button type="submit" className="ml-2"><IconSearch /></button>
-    </form>
+    <div className="h-screen bg-gray-900 flex flex-col justify-center items-center text-white">
+    <header className="text-center">
+      <h1 className='text-6xl font-extrabold mt-2'>Weather App</h1>
+      <form onSubmit={handleLocation} className="flex items-center justify-center mt-10">
+        <input 
+          type='text' 
+          className='py-2 px-3 w-64 border rounded-lg border-gray-700 text-gray-300 bg-gray-800 focus:outline-none focus:border-blue-500' 
+          placeholder="Enter location..."
+          value={currentLocation} 
+          onChange={handleInput} 
+        />
+        <button type="submit" className="ml-2 p-2 bg-gray-700 hover:bg-gray-600 focus:outline-none focus:bg-gray-600 rounded-lg">
+          <IconSearch className="text-white" />
+        </button>
+      </form>
     </header>
-    <div className="flex justify-center items-center mt-10">
-      <img src={weatherJSON?.image} alt="weatherIcon" className="w-30 h-30 mr-2" />
-      <h1 className="text-xl">{weatherJSON?.description}</h1>
-    </div>
-      {weatherData && <CurrentCard data={weatherData.current}></CurrentCard>}
-    <h1 className='text-4xl font-extrabold dark:text-black flex justify-center mt-10'>Hourly Weather</h1>
-      {weatherData && <HourlyCard data={weatherData.hourly}></HourlyCard>}
-    <h1 className='text-4xl font-extrabold dark:text-black flex justify-center mt-10'>Week Weather</h1>
-      {weatherData && <DailyCard data={weatherData.daily}></DailyCard>}
-    <footer></footer>
-  </>
+    
+    {!showHourly && !showDaily && (
+      <div className="flex flex-col items-center mt-10">
+        <img src={weatherJSON?.image} alt="weatherIcon" className="w-30 h-30 mb-2" />
+        <h1 className="text-xl text-center mb-4">{weatherJSON?.description}</h1>
+        {weatherData && <CurrentCard data={weatherData.current}></CurrentCard>}
+        <div className="flex justify-center mt-10">
+          <button onClick={handleHourlyButtonClick} className="mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Show Hourly</button>
+          <button onClick={handleDailyButtonClick} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Show Daily</button>
+        </div>
+      </div>
+    )}
+    
+    {showHourly && (
+      <>
+      <h1 className='text-4xl font-extrabold mt-10 mb-10'>Hourly Weather</h1>
+        {weatherData && <HourlyCard data={weatherData.hourly}></HourlyCard>}
+      <button onClick={() => setShowHourly(false)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Go Back</button></>
+    )}
+    
+    {showDaily && (
+      <div className="mt-10">
+        <h1 className='text-4xl font-extrabold mb-4'>Week Weather</h1>
+        {weatherData && <DailyCard data={weatherData.daily}></DailyCard>}
+        <button onClick={() => setShowDaily(false)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Go Back</button>
+      </div>
+    )}
+  
+  <footer className='fixed bottom-0 w-full text-center py-4 justify-center font-BebasNeue font-thin'>
+    <p>Data provided by Open Meteo</p>
+    <p>by Simone Rimedio</p>
+  </footer>
+  </div>
+  
   );
 };
 

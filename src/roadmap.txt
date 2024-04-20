@@ -1,13 +1,13 @@
 da fare:
 
-creare i components
 aggiungere qualità dell'aria
 aggiungere tema modificabile
 aggiungere conversione unità di misura (opzionale)
-aggiungere footer
+
 
 completate:
 funzione conversione cardinale https://gist.github.com/theKAKAN 
 aggiungere differenza notte e giorno
 aggiungere previsioni settimanali
 aggiungere previsioni giornaliere 
+aggiungere footer

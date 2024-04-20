@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
 import { WeatherDataType } from '../types/types';
 import cardinalConv from '../utils/cardinalConversion';
+import { IconTemperature, IconDroplet, IconThermometer, IconArrowDownToArc, IconWind, IconWindsock } from '@tabler/icons-react';
 
 interface CurrentCardProps {
   data: WeatherDataType;
@@ -10,33 +11,49 @@ interface UnitLabels {
   [key: string]: string;
 }
 
+interface IconsLabels {
+  [key: string]: JSX.Element;
+}
+
+const IconsLabels: IconsLabels = {
+  'Temperature' : <IconTemperature/>,
+  'Humidity': <IconDroplet/>,
+  'Apparent Temperature': <IconThermometer/>,
+  'Pressure': <IconArrowDownToArc/>,
+  'Wind Speed': <IconWind/>,
+  'Wind Direction': <IconWindsock/>
+};
+
+
 const unitLabels: UnitLabels = {
-  'temperature': '° C',
-  'humidity': '%',
-  'pressure': 'mbar',
-  'wind speed': 'Km/h',
-  'wind direction': ''
+  'Temperature': '° C',
+  'Humidity': '%',
+  'Apparent Temperature': '° C',
+  'Pressure': 'mbar',
+  'Wind Speed': 'Km/h',
+  'Wind Direction': ''
 };
 
 const CurrentCard = ({ data }: CurrentCardProps): ReactElement => {
   const dataMap: { [key: string]: any } = {
-    'temperature': data.temperature2m,
-    'humidity': data.relativeHumidity2m,
-    'apparent temperature': data.apparentTemperature,
-    'pressure': data.surfacePressure,
-    'wind speed': data.windSpeed10m,
-    'wind direction': data.windDirection10m
+    'Temperature': data.temperature2m,
+    'Humidity': data.relativeHumidity2m,
+    'Apparent Temperature': data.apparentTemperature,
+    'Pressure': data.surfacePressure,
+    'Wind Speed': data.windSpeed10m,
+    'Wind Direction': data.windDirection10m
   };
 
   const series = Object.keys(dataMap).map((key, index) => {
     const value = dataMap[key];
     const label = unitLabels[key];
+    const icons = IconsLabels[key];
     const displayValue =
-      key === 'wind direction' ? cardinalConv(value) : parseInt(value);
+      key === 'Wind Direction' ? cardinalConv(value) : parseInt(value);
 
     return (
-      <div key={index} className='bg-white rounded-lg shadow-md p-4 w-48'>
-        <p className='text-sm mb-2 text-black'>{key}</p>
+      <div key={index} className='bg-white rounded-lg shadow-md p-4 w-48 text-center'>
+        <p className='text-sm mb-2 text-black'>{icons}{key}</p>
         <h1 className='text-md text-gray-600 font-bold'>{displayValue} {label}</h1>
       </div>
     );
