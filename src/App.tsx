@@ -1,5 +1,5 @@
 import { ReactElement, useState, useEffect, ChangeEvent, FormEvent } from 'react';
-import { GetWeatherProps, WeatherData } from './types/types';
+import { GetWeatherProps, WeatherData, WeatherDataJSON, WeatherJSONProps } from './types/types';
 import { Tokens } from './utils/env';
 import useFetch from './hooks/useFetch';
 import weatherApi from './utils/weatherApi';
@@ -10,17 +10,6 @@ import CurrentCard from './components/CurrentCard';
 import DailyCard from './components/DailyCard';
 import HourlyCard from './components/HourlyCard';
 
-interface WeatherJSONProps {
-  description: string;
-  image: string;
-}
-
-interface WeatherDataJSON {
-  [key: string]: {
-    day: WeatherJSONProps;
-    night: WeatherJSONProps;
-  };
-}
 
 type Location = string;
 
@@ -47,6 +36,7 @@ const App = (): ReactElement => {
     setWeatherJSON({ description: description || '', image: image || '' });
   };
 
+  
   const handleInput = (event: ChangeEvent<HTMLInputElement>): void => {
     setCurrentLocation(event.target.value);
   };
@@ -119,7 +109,7 @@ const App = (): ReactElement => {
     
     {showDaily && (
       <div className="mt-10">
-        <h1 className='text-4xl font-extrabold mb-4'>Week Weather</h1>
+        <h1 className='text-4xl font-extrabold mb-10 mt-10'>Week Weather</h1>
         {weatherData && <DailyCard data={weatherData.daily}></DailyCard>}
         <button onClick={() => setShowDaily(false)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Go Back</button>
       </div>

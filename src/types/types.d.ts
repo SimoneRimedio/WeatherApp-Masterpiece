@@ -30,3 +30,15 @@ export type WeatherDataType = {
   windDirection10m?: number;
   isDay?: number;
 }
+
+export interface WeatherJSONProps {
+  description: string;
+  image: string;
+}
+
+export interface WeatherDataJSON {
+  [key: string]: {
+    day: WeatherJSONProps;
+    night: WeatherJSONProps;
+  };
+}
