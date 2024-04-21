@@ -16,25 +16,25 @@ const HourlyCard = ({ data }: HourlyCardProps): ReactElement => {
   const now = date.getHours();
 
   for (let i = now; series.length < 24; i++) {
-    const index = i % 24; // Calcola l'indice dell'array delle previsioni
+    const index = i % 24; // Calculate the index of the forecast array
     const seriesDiv = (
-      <div key={i} className='flex-grow border border-gray-300 rounded text-center py-8 w-16 h-16'>
-        <h1>{index}:00</h1>
-        <p className='font-bold'>{parseInt(String(temp[i]))}° C</p>
-        <p>{parseInt(String(prob[index]))} %</p>
-        <p>{parseInt(String(wind[index]))} Km/h</p>
+      <div key={i} className="relative inline-block w-48 h-32 text-center">
+        <h1 className='font-black mt-2'>{index}:00</h1>
+        <p className='mt-2'>{parseInt(String(temp[i]))}° C</p>
+        <p className='mt-2'>{parseInt(String(prob[index]))} %</p>
+        <p className='mt-2'>{parseInt(String(wind[index]))} Km/h</p>
       </div>
     );
     series.push(seriesDiv);
   }
 
   return (
-    <div className="flex overflow-x-auto w-auto scrollbar-hide gap-4 mt-15 mb-20">
-      {series}
+    <div className="overflow-x-auto flex-wrap">
+      <div className="flex space-x-1">
+        {series}
+      </div>
     </div>
   );
 };
 
 export default HourlyCard;
-
-

@@ -52,15 +52,15 @@ const CurrentCard = ({ data }: CurrentCardProps): ReactElement => {
       key === 'Wind Direction' ? cardinalConv(value) : parseInt(value);
 
     return (
-      <div key={index} className='bg-white rounded-lg shadow-md p-4 w-48 text-center'>
+      <div key={index} className='bg-white rounded-lg shadow-lg p-4 w-48 h-32 text-center'>
         <p className='text-sm mb-2 text-black'>{icons}{key}</p>
-        <h1 className='text-md text-gray-600 font-bold'>{displayValue} {label}</h1>
+        <h1 className='text- text-gray-600 font-bold'>{displayValue} {label}</h1>
       </div>
     );
   });
 
   return (
-    <div className='flex justify-center mt-10 space-x-4 text-center'>
+    <div className='flex justify-center content-center mt-10 flex-wrap gap-2'>
       {series}
     </div>
   );

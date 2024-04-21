@@ -15,8 +15,8 @@ const DailyCard = ({ data }: DailyCardProps): ReactElement => {
 
   for (let i = 0; i < 7; i++) {
     const seriesDiv = (
-      <div key={i} className='bg-white rounded-lg shadow-md p-4 w-48 text-black'>
-        <h1>{String(time && time[i]).substring(0,3)}</h1>
+      <div key={i} className='bg-white rounded-lg shadow-md p-4 w-52 h-32'>
+        <h1 className='font-black '>{String(time && time[i]).substring(0,3)}</h1>
         <p>Temperature: {parseInt(String(temp_min && temp_min[i]))}° / {parseInt(String(temp_max && temp_max[i]))}°</p>
         <p>Precipitation: {parseInt(String(prob_max && prob_max[i]))} %</p>
       </div>
@@ -24,9 +24,8 @@ const DailyCard = ({ data }: DailyCardProps): ReactElement => {
     series.push(seriesDiv);
   };
 
-
   return (
-    <div className="flex justify-center mt-10 space-x-4 text-center">
+    <div className="flex justify-center content-center mt-10 flex-wrap gap-2">
       {series}
     </div>
   );
