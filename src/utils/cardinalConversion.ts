@@ -1,4 +1,4 @@
-const getDirection = ( angle: number) => {
+const getDirection = (angle: number) => {
     let directions = ["N","NNE","NE","ENE","E",
 		"ESE", "SE", "SSE","S",
 		"SSW","SW","WSW","W",

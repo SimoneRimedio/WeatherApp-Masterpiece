@@ -1,5 +1,5 @@
 import { ReactElement, useState, useEffect, ChangeEvent, FormEvent } from 'react';
-import { WeatherData, WeatherDataJSON, WeatherDescription } from './types/types';
+import { WeatherData, WeatherDataJSON, WeatherJSONProps} from './types/types';
 import { Tokens } from './utils/env';
 import useFetch from './hooks/useFetch';
 import weatherApi from './utils/weatherApi';
@@ -13,7 +13,7 @@ import HourlyCard from './components/HourlyCard';
 const App = (): ReactElement => {
   const [weatherData, setWeatherData] = useState<WeatherData>();
   const [currentLocation, setCurrentLocation] = useState<string>('');
-  const [weatherJSON, setWeatherJSON] = useState<WeatherDescription>({ description: '', image: '' });
+  const [weatherJSON, setWeatherJSON] = useState<WeatherJSONProps>({ description: '', image: '' });
   const [showHourly, setShowHourly] = useState(false);
   const [showDaily, setShowDaily] = useState(false);
 
@@ -107,11 +107,11 @@ const App = (): ReactElement => {
       )}
       
       {showDaily && (
-        <div className="flex flex-col items-center mt-10">
-          <h1 className='text-4xl font-extrabold mb-10 mt-10 font-Poppins'>Week Weather</h1>
+        <>
+          <h1 className='text-4xl font-extrabold mb-10 mt-20 font-Poppins'>Week Weather</h1>
           {weatherData && <DailyCard data={weatherData.daily}></DailyCard>}
           <button onClick={() => setShowDaily(false)} className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mt-10">Go Back</button>
-        </div>
+        </>
       )}
 
       <footer className='relative bottom-0 w-full text-center py-4 justify-center font-BebasNeue mt-10 font-extralight'>

@@ -43,7 +43,4 @@ export interface WeatherDataJSON {
   };
 }
 
-interface WeatherDescription {
-  description: string;
-  image: string;
-}
+
