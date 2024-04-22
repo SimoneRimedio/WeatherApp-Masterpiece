@@ -8,7 +8,7 @@ const weatherApi = async ({ latitude, longitude }: GetWeatherProps): Promise<Wea
     'timezone': 'auto',
     'current': ['temperature_2m', 'relative_humidity_2m', 'apparent_temperature', 'precipitation', 'rain', 'showers', 'snowfall', 'weather_code', 'cloud_cover', 'surface_pressure', 'wind_speed_10m', 'wind_direction_10m',"is_day"],
     'hourly': ['temperature_2m', 'precipitation_probability', 'precipitation', 'wind_speed_10m'],
-    'daily': ['temperature_2m_max', 'temperature_2m_min', 'precipitation_probability_max'],
+    'daily': ['temperature_2m_max', 'temperature_2m_min', 'precipitation_probability_max','weather_code'],
   };
   
   const responses = await fetchWeatherApi('https://api.open-meteo.com/v1/forecast', params);
@@ -36,7 +36,7 @@ const weatherApi = async ({ latitude, longitude }: GetWeatherProps): Promise<Wea
       surfacePressure: current.variables(9)!.value(),
       windSpeed10m: current.variables(10)!.value(),
       windDirection10m: current.variables(11)!.value(),
-      isDay: current.variables(0)!.value(),
+      isDay: current.variables(12)!.value(),
       keys: undefined
     },
 
@@ -54,6 +54,7 @@ const weatherApi = async ({ latitude, longitude }: GetWeatherProps): Promise<Wea
       temperature2mMax: daily.variables(0)!.valuesArray()!,
       temperature2mMin: daily.variables(1)!.valuesArray()!,
       precipitationProbabilityMax: daily.variables(2)!.valuesArray()!,
+      weatherCode: current.variables(3)!.value(),
       keys: undefined
     },
   };

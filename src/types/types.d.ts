@@ -23,7 +23,7 @@ export type WeatherDataType = {
   rain?: number;
   showers?: number;
   snowfall?: number;
-  weatherCode?: number;
+  weatherCode?: number | Float32Array;
   cloudCover?: number;
   surfacePressure?: number;
   windSpeed10m?: Float32Array | number;

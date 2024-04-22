@@ -1,10 +1,10 @@
 import { ReactElement } from 'react';
-import { WeatherDataType } from '../types/types'; 
+import { WeatherDataType } from '../types/types';
 
 interface DailyCardProps {
   data: WeatherDataType;
 }
-
+ 
 const DailyCard = ({ data }: DailyCardProps): ReactElement => {
   const time = Array.isArray(data.time) && data.time.length > 0 ? data.time : null;
   const temp_min = data.temperature2mMin ?? null;
