@@ -1,5 +1,5 @@
 import { ReactElement, useState, useEffect, ChangeEvent, FormEvent } from 'react';
-import { WeatherData, WeatherDataJSON } from './types/types';
+import { WeatherData, WeatherDataJSON, WeatherDescription } from './types/types';
 import { Tokens } from './utils/env';
 import useFetch from './hooks/useFetch';
 import weatherApi from './utils/weatherApi';
@@ -9,11 +9,6 @@ import { IconSearch } from '@tabler/icons-react';
 import CurrentCard from './components/CurrentCard';
 import DailyCard from './components/DailyCard';
 import HourlyCard from './components/HourlyCard';
-
-interface WeatherDescription {
-  description: string;
-  image: string;
-}
 
 const App = (): ReactElement => {
   const [weatherData, setWeatherData] = useState<WeatherData>();

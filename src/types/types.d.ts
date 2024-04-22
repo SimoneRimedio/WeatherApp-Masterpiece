@@ -42,3 +42,8 @@ export interface WeatherDataJSON {
     night: WeatherJSONProps;
   };
 }
+
+interface WeatherDescription {
+  description: string;
+  image: string;
+}
