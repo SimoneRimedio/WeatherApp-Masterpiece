@@ -81,17 +81,17 @@ const App = (): ReactElement => {
   return (
     <div className="container mx-auto flex flex-col justify-center items-center min-h-screen">
       <header className="text-center">
-        <h1 className='text-6xl font-extrabold mt-2 font-Poppins'>Weather App</h1>
+        <h1 className='font-extrabold mt-2 font-Poppins md:text-4xl lg:text-5xl sm:text-4xl '>Weather App</h1>
         <form onSubmit={handleLocation} className="flex items-center justify-center mt-10">
           <input 
             type='text' 
-            className='py-2 px-3 w-full md:w-auto border rounded-lg border-gray-700 text-gray-300 bg-gray-800 focus:outline-none focus:border-blue-500' 
+            className='py-2 px-3 w-full md:w-full border rounded-lg border-gray-600 text-gray-300 bg-gray-700 focus:outline-none focus:border-blue-500' 
             placeholder="Enter location..."
             value={currentLocation} 
             onChange={handleInput} 
           />
-          <button type="submit" className="ml-2 p-2 bg-gray-700 hover:bg-gray-600 focus:outline-none focus:bg-gray-600 rounded-lg">
-            <IconSearch className="text-white" />
+          <button type="submit" className="ml-2 p-2 bg-gray-700 hover:bg-gray-600 focus:outline-none focus:bg-gray-700 rounded-lg">
+            <IconSearch className="text-gray-300" />
           </button>
         </form>
       </header>
@@ -100,7 +100,8 @@ const App = (): ReactElement => {
       
       {showHourly && (
         <>
-          <h1 className='text-4xl font-extrabold mt-20 mb-10 font-Poppins'>Hourly Weather</h1>
+          <h1 className='text-4xl font-extrabold mt-20 font-Poppins'>24h Weather</h1>
+          <h3 className='text-2xl font-bold mt-5 mb-10 font-Poppins'>(Not Local GMT)</h3>
           {weatherData && <HourlyCard data={weatherData.hourly}></HourlyCard>}
           <button onClick={() => setShowHourly(false)} className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mt-10">Go Back</button>
         </>

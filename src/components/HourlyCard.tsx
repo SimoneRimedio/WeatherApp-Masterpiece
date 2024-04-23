@@ -21,7 +21,7 @@ const HourlyCard = ({ data }: HourlyCardProps): ReactElement => {
   for (let i = now; series.length < 24; i++) {
     const index = i % 24; // Calculate the index of the forecast array
     const seriesDiv = (
-      <div key={i} className="carousel-item text-black w-52 p-4 border-2 text-center">
+      <div key={i} className="carousel-item text-gray-300 bg-gray-700 rounded-lg w-52 h-38 p-4 border-2 border-gray-800 text-center">
         <h1 className='font-black mt-2'>{index}:00</h1>
         <p className='mt-2'>{parseInt(String(temp[i])) + "° C"}</p>
         <p className='mt-2'>{parseInt(String(prob[index])) + " %"}</p>

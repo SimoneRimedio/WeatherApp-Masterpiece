@@ -6,5 +6,5 @@
 @tailwind utilities;
 
 body {
-  @apply m-0 font-Nunito font-bold;
+  @apply m-0 font-Nunito font-bold bg-neutral-300;
 }

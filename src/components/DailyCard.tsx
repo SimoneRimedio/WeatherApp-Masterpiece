@@ -5,36 +5,34 @@ import { WeatherDataType } from '../types/types';
 import imagesData from '../../public/images.json';
 
 const images: Images = imagesData;
-type Images = { [key: string]: string };
+type Images = { [key: number]: string };
 
 interface DailyCardProps {
   data: WeatherDataType;
 }
-
 
 const DailyCard = ({ data }: DailyCardProps): ReactElement => {
   const time = Array.isArray(data.time) && data.time.length > 0 ? data.time : null;
   const temp_min = data.temperature2mMin ?? null;
   const temp_max = data.temperature2mMax ?? null;
   const prob_max = data.precipitationProbabilityMax ?? null;
-  const weatherCode = Array.isArray(data.weatherCode) && data.weatherCode.length > 0 ? data.weatherCode : null;
-  
+  const weather_code = data.weatherCode ?? null;
 
   const series: JSX.Element[] = [];
 
-  for (let i: number = 0; i < 7; i++) {
-    console.log(weatherCode && weatherCode[i]);
-    
-    const seriesDiv = (
-      <div key={i} className='bg-white rounded-lg shadow-md p-4 w-52 text-center'>
-        <h1 className='font-black '>{String(time && time[i]).substring(0,3)}</h1>
-        <img alt='weatherImage' src={(weatherCode && images[weatherCode[i]]) ?? ''} />
-        <p>Temperature: {parseInt(String(temp_min && temp_min[i]))}° / {parseInt(String(temp_max && temp_max[i]))}°</p>
-        <p>Precipitation: {parseInt(String(prob_max && prob_max[i]))} %</p>
-      </div>
-    );
-    series.push(seriesDiv);
-  };
+  if (weather_code instanceof Float32Array) {
+    for (let i: number = 0; i < 7; i++) {
+      const seriesDiv = (
+        <div key={i} className='bg-gray-700 text-gray-300 rounded-lg shadow-md border-2 border-gray-900 p-4 w-52 h-52 text-center'>
+          <h1 className='font-black'>{String(time && time[i]).substring(0,3)}</h1>
+          <img className="mx-auto" alt='weatherImage' src={images[weather_code[i]]}></img>
+          <p>Temperature: {parseInt(String(temp_min && temp_min[i]))}° / {parseInt(String(temp_max && temp_max[i]))}°</p>
+          <p>Precipitation: {parseInt(String(prob_max && prob_max[i]))} %</p>
+        </div>
+      );
+      series.push(seriesDiv);
+    }
+  }
 
   const settings = {
     arrows: false,
@@ -74,7 +72,6 @@ const DailyCard = ({ data }: DailyCardProps): ReactElement => {
           position: 'relative',
           bottom: '10px', 
           marginTop: '50px'
-          
         }}
       >
         <ul className="slick-dots">{dots}</ul>
