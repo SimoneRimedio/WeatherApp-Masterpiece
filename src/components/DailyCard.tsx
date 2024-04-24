@@ -23,11 +23,13 @@ const DailyCard = ({ data }: DailyCardProps): ReactElement => {
   if (weather_code instanceof Float32Array) {
     for (let i: number = 0; i < 7; i++) {
       const seriesDiv = (
-        <div key={i} className='bg-gray-700 text-gray-300 rounded-lg shadow-md border-2 border-gray-900 p-4 w-52 h-54 text-center'>
+        <div key={i} className='carousel-item bg-card rounded-lg text-black border-2 border-tools p-4 w-52 h-54 text-center'>
           <h1 className='font-black'>{String(time && time[i]).substring(0,3)}</h1>
           <img className="mx-auto" alt='weatherImage' src={images[weather_code[i]]}></img>
-          <p>Temperature: {parseInt(String(temp_min && temp_min[i]))}° / {parseInt(String(temp_max && temp_max[i]))}°</p>
-          <p>Precipitation: {parseInt(String(prob_max && prob_max[i]))} %</p>
+          <label>Temperature:</label>
+          <p>{parseInt(String(temp_min && temp_min[i]))}° / {parseInt(String(temp_max && temp_max[i]))}°</p>
+          <label>Precipitation:</label>
+          <p>{parseInt(String(prob_max && prob_max[i]))} %</p>
         </div>
       );
       series.push(seriesDiv);
@@ -35,7 +37,7 @@ const DailyCard = ({ data }: DailyCardProps): ReactElement => {
   }
 
   const settings = {
-    arrows: false,
+    arrows: true,
     dots: true,
     infinite: false,
     speed: 500,
