@@ -43,6 +43,7 @@ const App = (): ReactElement => {
     });
     
   }, []);
+  
   const handleHourlyButtonClick = () => {
     setShowHourly(true);
     setShowDaily(false);
