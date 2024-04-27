@@ -29,8 +29,4 @@ export const fetchWeatherByGeolocation = async ({ setCurrentLocation, setWeather
       }
     );
   }
-  else {
-    console.error("Geolocation not supported");
-    alert("La geolocalizzazione non è supportata dal tuo browser.");
-  }
 };
