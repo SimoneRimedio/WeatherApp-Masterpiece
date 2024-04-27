@@ -88,6 +88,7 @@ const DailyCard = ({ data }: DailyCardProps): ReactElement => {
 
   return (
     <div className="mx-auto w-3/4">
+      <h1 className='text-4xl font-extrabold mb-10 mt-20 font-Poppins text-text-header'>Week Weather</h1>
       <Slider {...settings}>     
         {series}
       </Slider> 

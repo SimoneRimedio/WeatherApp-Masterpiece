@@ -84,6 +84,8 @@ const HourlyCard = ({ data }: HourlyCardProps): ReactElement => {
 
   return (
     <div className="mx-auto w-3/4">
+      <h1 className='text-4xl font-extrabold mt-20 font-Poppins text-text-header'>24h Weather</h1>
+      <h3 className='text-2xl font-bold mt-5 mb-10 font-Poppins text-text-header'>(Not Local GMT)</h3>
       <Slider {...settings}>     
         {series}
       </Slider> 

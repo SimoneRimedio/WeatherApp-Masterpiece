@@ -2,13 +2,18 @@ import { ReactElement, useState, useEffect, ChangeEvent, FormEvent } from 'react
 import { WeatherData, WeatherDataJSON, WeatherJSONProps} from './types/types';
 import { Tokens } from './utils/env';
 import useFetch from './hooks/useFetch';
-import weatherApi from './utils/weatherApi';
-import data from '../public/weather.json';
 import { IconSearch } from '@tabler/icons-react';
+import data from '../public/weather.json';
 
 import CurrentCard from './components/CurrentCard';
 import DailyCard from './components/DailyCard';
 import HourlyCard from './components/HourlyCard';
+import Footer from './components/Footer';
+import GoBackButton from './components/GoBackButton';
+
+import { getWeatherData } from './utils/getWeatherData';
+import { updateWeatherJSON } from './utils/getImageJSON';
+import { fetchWeatherByGeolocation } from './utils/fetchWeatherByGeolocation';
 
 const App = (): ReactElement => {
   const [weatherData, setWeatherData] = useState<WeatherData>();
@@ -17,45 +22,27 @@ const App = (): ReactElement => {
   const [showHourly, setShowHourly] = useState(false);
   const [showDaily, setShowDaily] = useState(false);
 
-  const getWeatherData = async ({ latitude, longitude }: { latitude: number; longitude: number }): Promise<void> => {
-    const weatherData = await weatherApi({ latitude, longitude });
-    setWeatherData(weatherData);
-    
-    const code = weatherData.current.weatherCode; 
-    const currentWeather = typeof code === 'number' ? (data as WeatherDataJSON)[code] : null;
-
-    const isDay = weatherData.current.isDay;
-    const description = isDay ? currentWeather?.day.description : currentWeather?.night.description;
-    const image = isDay ? currentWeather?.day.image : currentWeather?.night.image;
-
-    setWeatherJSON({ description: description ?? '', image: image ?? '' });
-  };
-
   const handleInput = (event: ChangeEvent<HTMLInputElement>): void => {
     setCurrentLocation(event.target.value);
   };
 
   const handleLocation = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
-    const pos = await useFetch({ url: `https://geocode.maps.co/search?q=${currentLocation}&api_key=${Tokens.GeocodeToken}` });
-    await getWeatherData({ latitude: pos.data[0]?.lat || 0, longitude: pos.data[0]?.lon || 0 });
+      const pos = await useFetch({ url: `https://geocode.maps.co/search?q=${currentLocation}&api_key=${Tokens.GeocodeToken}` });
+      const weatherData = await getWeatherData({ latitude: pos.data[0]?.lat || 0, longitude: pos.data[0]?.lon || 0 });
+      setWeatherData(weatherData);
+      setWeatherJSON(updateWeatherJSON(weatherData, data as WeatherDataJSON));
   };
 
   useEffect(() => {
-    const fetchWeatherByGeolocation = async () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(async (pos) => {
-          const { latitude, longitude } = pos.coords;
-
-          const getPosition = await useFetch({ url: `https://geocode.maps.co/reverse?lat=${latitude}&lon=${longitude}&api_key=${Tokens.GeocodeToken}` });
-          setCurrentLocation(getPosition.data.address.county);
-          await getWeatherData({ latitude, longitude });
-        });
-      }
-    };
-    fetchWeatherByGeolocation();
+    fetchWeatherByGeolocation({
+      setCurrentLocation,
+      setWeatherData,
+      setWeatherJSON,
+      data
+    });
+    
   }, []);
-
   const handleHourlyButtonClick = () => {
     setShowHourly(true);
     setShowDaily(false);
@@ -100,25 +87,19 @@ const App = (): ReactElement => {
       
       {showHourly && (
         <>
-          <h1 className='text-4xl font-extrabold mt-20 font-Poppins text-text-header'>24h Weather</h1>
-          <h3 className='text-2xl font-bold mt-5 mb-10 font-Poppins text-text-header'>(Not Local GMT)</h3>
           {weatherData && <HourlyCard data={weatherData.hourly}></HourlyCard>}
-          <button onClick={() => setShowHourly(false)} className="text-card bg-tools hover:bg-tools-shadow focus:outline-card font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mt-10">Go Back</button>
+          <GoBackButton onClick={() => setShowHourly(false)} />
         </>
       )}
       
       {showDaily && (
         <>
-          <h1 className='text-4xl font-extrabold mb-10 mt-20 font-Poppins text-text-header'>Week Weather</h1>
           {weatherData && <DailyCard data={weatherData.daily}></DailyCard>}
-          <button onClick={() => setShowDaily(false)} className="text-card bg-tools hover:bg-tools-shadow focus:outline-card font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mt-10">Go Back</button>
+          <GoBackButton onClick={() => setShowDaily(false)} />        
         </>
       )}
 
-      <footer className='relative bottom-0 w-full text-center py-4 justify-center font-BebasNeue mt-10 font-extralight'>
-        <p>Data provided by Open Meteo</p>
-        <p>by Simone Rimedio</p>
-      </footer>
+      <Footer/>
     </div>
   );
 };
