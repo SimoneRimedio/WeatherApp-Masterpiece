@@ -23,7 +23,7 @@ const DailyCard = ({ data }: DailyCardProps): ReactElement => {
   if (weather_code instanceof Float32Array) {
     for (let i: number = 0; i < 7; i++) {
       const seriesDiv = (
-        <div key={i} className='carousel-item bg-card rounded-lg text-black border-2 border-tools p-4 w-52 h-54 text-center'>
+        <div key={i} className='carousel-item bg-bgk rounded-lg text-black border-2 border-tools p-4 w-52 h-54 text-center'>
           <h1 className='font-black'>{String(time && time[i]).substring(0,3)}</h1>
           <img className="mx-auto" alt='weatherImage' src={images[weather_code[i]]}></img>
           <label>Temperature:</label>

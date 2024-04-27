@@ -35,13 +35,7 @@ const App = (): ReactElement => {
   };
 
   useEffect(() => {
-    fetchWeatherByGeolocation({
-      setCurrentLocation,
-      setWeatherData,
-      setWeatherJSON,
-      data
-    });
-    
+    fetchWeatherByGeolocation({setCurrentLocation, setWeatherData, setWeatherJSON, data});
   }, []);
   
   const handleHourlyButtonClick = () => {
