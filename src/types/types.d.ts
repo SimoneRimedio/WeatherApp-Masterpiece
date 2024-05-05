@@ -29,7 +29,7 @@ export type WeatherDataType = {
   windSpeed10m?: Float32Array | number;
   windDirection10m?: number;
   isDay?: number;
-}
+};
 
 export interface WeatherJSONProps {
   description: string;
@@ -42,5 +42,3 @@ export interface WeatherDataJSON {
     night: WeatherJSONProps;
   };
 }
-
-
