@@ -1,14 +1,7 @@
 import { ReactElement } from "react";
 import { WeatherDataType } from "../../types/types";
 import cardinalConv from "../../utils/cardinalConversion";
-import {
-  IconTemperature,
-  IconDroplet,
-  IconThermometer,
-  IconArrowDownToArc,
-  IconWind,
-  IconWindsock,
-} from "@tabler/icons-react";
+import { IconTemperature, IconDroplet, IconThermometer, IconArrowDownToArc, IconWind, IconWindsock } from "@tabler/icons-react";
 
 interface CurrentCardProps {
   data: WeatherDataType;
@@ -60,13 +53,13 @@ const CurrentCard = ({ data }: CurrentCardProps): ReactElement => {
     return (
       <div
         key={index}
-        className="bg-card rounded-lg shadow-lg shadow-gray-500 p-4 w-48 h-32 text-center text-text-card"
+        className="bg-card rounded-lg shadow-lg shadow-gray-600 p-4 w-48 h-32 text-center text-text-card"
       >
-        <p className="text-sm mb-2 ">
+        <p className="text-md mb-2 ">
           {icons}
           {key}
         </p>
-        <h1 className="text-md font-bold">
+        <h1 className="text-lg font-bold">
           {displayValue} {label}
         </h1>
       </div>

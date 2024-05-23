@@ -8,20 +8,25 @@ import {
 import { WeatherData, WeatherDataJSON, WeatherJSONProps } from "./types/types";
 import { Tokens } from "./utils/env";
 import useFetch from "./hooks/useFetch";
-import { IconSearch } from "@tabler/icons-react";
 import data from "./assets/weather.json";
 
-import CurrentCard from "./components/card/CurrentCard";
+import Footer from "./components/layout/Footer";
+import Header from "./components/layout/Header";
+import Menu from "./components/layout/Menu.tsx";
+import InputForm from "./components/layout/InputForm.tsx";
+
 import DailyCard from "./components/card/DailyCard";
 import HourlyCard from "./components/card/HourlyCard";
-import Footer from "./components/page/Footer";
-import GoBackButton from "./components/page/GoBackButton";
+import WeatherCards from "./components/card/WeatherCards";
 
 import { getWeatherData } from "./utils/getWeatherData";
 import { updateWeatherJSON } from "./utils/getImageJSON";
 import { fetchWeatherByGeolocation } from "./utils/fetchWeatherByGeolocation";
+import Loading from "./common/Loader/Loading.tsx";
+import Alert from "@mui/material/Alert";
 
 const App = (): ReactElement => {
+  const [loading, setLoading] = useState<boolean>(true);
   const [weatherData, setWeatherData] = useState<WeatherData>();
   const [currentLocation, setCurrentLocation] = useState<string>("");
   const [displayLocation, setDisplayLocation] = useState<string>("");
@@ -29,8 +34,8 @@ const App = (): ReactElement => {
     description: "",
     image: "",
   });
-  const [showHourly, setShowHourly] = useState(false);
-  const [showDaily, setShowDaily] = useState(false);
+  const [menuSelection, setMenuSelection] = useState<string>("current");
+  const [error, setError] = useState<string | null>(null);
 
   const handleInput = (event: ChangeEvent<HTMLInputElement>): void => {
     setCurrentLocation(event.target.value);
@@ -54,98 +59,65 @@ const App = (): ReactElement => {
   };
 
   useEffect(() => {
-    fetchWeatherByGeolocation({
-      setCurrentLocation,
-      setWeatherData,
-      setWeatherJSON,
-      data,
-    });
+    setTimeout(() => setLoading(false), 3000);
+    try {
+      fetchWeatherByGeolocation({
+        setCurrentLocation,
+        setWeatherData,
+        setWeatherJSON,
+        data,
+        setError,
+      });
+    } catch (err) {
+      setError(
+        "Error retrieving location. Make sure you have enabled geolocation in your browser."
+      );
+    }
   }, []);
 
-  const handleHourlyButtonClick = () => {
-    setShowHourly(true);
-    setShowDaily(false);
-  };
-
-  const handleDailyButtonClick = () => {
-    setShowHourly(false);
-    setShowDaily(true);
-  };
-
-  const renderWeatherCards = () => (
-    <div className="flex flex-col items-center mt-10 p-10">
-      <h1 className="text-md text-center mb-4 font-Poppins font-bold ">
-        {displayLocation}
-      </h1>
-        <img
-          src={weatherJSON.image}
-          alt="weatherIcon"
-          className="w-30 h-30 mb-2"
-        />
-        <h1 className="text-xl text-center mb-4 text-card">{weatherJSON.description}</h1>
-      {weatherData && <CurrentCard data={weatherData.current}></CurrentCard>}
-      <div className="flex justify-center mt-10 rounded-md">
-        <button
-          onClick={handleHourlyButtonClick}
-          className="text-card bg-tools hover:bg-tools-shadow focus:outline-card font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mt-10"
-        >
-          Show Hourly
-        </button>
-        <button
-          onClick={handleDailyButtonClick}
-          className="text-card bg-tools hover:bg-tools-shadow focus:outline-card font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mt-10"
-        >
-          Show Daily
-        </button>
-      </div>
-    </div>
-  );
-
   return (
-    <div className="background-img bg-fixed bg-no-repeat bg-cover min-h-screen">
-      <div className="container mx-auto flex flex-col justify-center items-center min-h-screen">
-        <header className="text-center">
-          <h1 className="font-extrabold mt-2 font-Poppins md:text-4xl lg:text-5xl text-4xl text-text-header">
-            Weather App
-          </h1>
-          <form
-            onSubmit={handleLocation}
-            className="flex items-center justify-center mt-10"
-          >
-            <input
-              type="text"
-              className="py-2 px-3 w-full md:w-full border rounded-lg border-tools-shadow text-card bg-tools focus:outline-none focus:border-blue-500"
-              placeholder="Enter location..."
-              value={currentLocation}
-              onChange={handleInput}
-            />
-            <button
-              type="submit"
-              className="ml-2 p-2 bg-tools hover:bg-tools-shadow focus:outline-none focus:bg-gray-700 rounded-lg"
-            >
-              <IconSearch className="text-card" />
-            </button>
-          </form>
-        </header>
-
-        {!showHourly && !showDaily && renderWeatherCards()}
-
-        {showHourly && (
-          <>
-            {weatherData && <HourlyCard data={weatherData.hourly}></HourlyCard>}
-            <GoBackButton onClick={() => setShowHourly(false)} />
-          </>
-        )}
-
-        {showDaily && (
-          <>
-            {weatherData && <DailyCard data={weatherData.daily}></DailyCard>}
-            <GoBackButton onClick={() => setShowDaily(false)} />
-          </>
-        )}
-
-        <Footer />
-      </div>
+    <div className="min-h-screen flex flex-col">
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <Header />
+          <div className="flex container mx-auto px-4 sm:px-6 justify-center items-center">
+            {error && <Alert severity="error">{error}</Alert>}
+            {!error && (
+              <>
+                <main className="flex flex-col items-center w-full">
+                  <InputForm
+                    currentLocation={currentLocation}
+                    handleInput={handleInput}
+                    handleLocation={handleLocation}
+                  />
+                  <div className="mt-8">
+                    <Menu
+                      menuSelection={menuSelection}
+                      setMenuSelection={setMenuSelection}
+                    />
+                  </div>
+                  {menuSelection === "current" && (
+                    <WeatherCards
+                      displayLocation={displayLocation}
+                      weatherJSON={weatherJSON}
+                      weatherData={weatherData?.current}
+                    />
+                  )}
+                  {menuSelection === "hourly" && weatherData && (
+                    <HourlyCard data={weatherData.hourly}></HourlyCard>
+                  )}
+                  {menuSelection === "daily" && weatherData && (
+                    <DailyCard data={weatherData.daily}></DailyCard>
+                  )}
+                </main>
+              </>
+            )}
+          </div>
+          <Footer />
+        </>
+      )}
     </div>
   );
 };

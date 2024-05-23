@@ -7,6 +7,9 @@ export default {
       backgroundImage: {
         "background-img": "url('/src/assets/background.jpg')",
       },
+      blur: {
+        bg: "40px",
+      },
       fontFamily: {
         BebasNeue: "Bebas Neue",
         Nunito: "Nunito",
@@ -14,12 +17,12 @@ export default {
       },
     },
     colors: {
-      bgk: "#E0DDCF",
-      card: "#F1F0EA",
+      bgk: "#FFFFF",
+      card: "#FDF7FA",
       "text-card": "#2D232E",
-      "text-header": "#2D232E",
-      tools: "#534B52",
-      "tools-shadow": "#474448",
+      header: "#3B293B",
+      tools: "#3B293B",
+      "tools-shadow": "#807C80",
     },
   },
   plugins: [],
