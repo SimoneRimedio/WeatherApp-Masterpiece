@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
 import Slider from "react-slick";
-import { WeatherDataType } from "../types/types";
+import { WeatherDataType } from "../../types/types";
 
-import imagesData from "../../public/images.json";
+import imagesData from "../../assets/images.json";
 
 const images: Images = imagesData;
 type Images = { [key: number]: string };
@@ -26,7 +26,7 @@ const DailyCard = ({ data }: DailyCardProps): ReactElement => {
       const seriesDiv = (
         <div
           key={i}
-          className="carousel-item bg-bgk rounded-lg text-black border-2 border-tools p-4 w-52 h-54 text-center"
+          className="carousel-item bg-card rounded-lg text-black border-2 border-tools p-4 w-52 h-54 text-center"
         >
           <h1 className="font-black">
             {String(time && time[i]).substring(0, 3)}
