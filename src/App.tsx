@@ -1,9 +1,9 @@
-import React, {
+import {
+  ReactElement,
   useState,
   useEffect,
   ChangeEvent,
   FormEvent,
-  ReactElement,
 } from "react";
 import { WeatherData, WeatherDataJSON, WeatherJSONProps } from "./types/types";
 import { Tokens } from "./utils/env";
@@ -76,74 +76,49 @@ const App = (): ReactElement => {
   }, []);
 
   return (
-    <>
-      <div className="bg-gray-900 min-h-screen text-white font-sans">
-        <Header menuSelection={""} setMenuSelection={function (selection: string): void {
-          throw new Error("Function not implemented.");
-        } }></Header>
-        <div className="ml-64 p-8">
-          <div className="flex justify-between items-center mb-6">
-            <div className="flex items-center">
-              <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md mr-4">
-                <svg
-                  className="h-4 w-4 inline-block mr-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  {/* ... bell icon svg ... */}
-                </svg>
-              </button>
-              <div className="flex items-center">
-                <img
-                  src="/profile-pic.jpg"
-                  alt="Profile Picture"
-                  className="h-8 w-8 rounded-full mr-2"
-                />
-                <span className="text-gray-400">Daniel Smith</span>
-              </div>
-            </div>
+    <div className="min-h-screen flex flex-col">
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <Header />
+          <div className="flex container mx-auto px-4 sm:px-6 justify-center items-center">
+            {error && <Alert severity="error">{error}</Alert>}
+            {!error && (
+              <>
+                <main className="flex flex-col items-center w-full">
+                  <InputForm
+                    currentLocation={currentLocation}
+                    handleInput={handleInput}
+                    handleLocation={handleLocation}
+                  />
+                  <div className="mt-8">
+                    <Menu
+                      menuSelection={menuSelection}
+                      setMenuSelection={setMenuSelection}
+                    />
+                  </div>
+                  {menuSelection === "current" && (
+                    <WeatherCards
+                      displayLocation={displayLocation}
+                      weatherJSON={weatherJSON}
+                      weatherData={weatherData?.current}
+                    />
+                  )}
+                  {menuSelection === "hourly" && weatherData && (
+                    <HourlyCard data={weatherData.hourly}></HourlyCard>
+                  )}
+                  {menuSelection === "daily" && weatherData && (
+                    <DailyCard data={weatherData.daily}></DailyCard>
+                  )}
+                </main>
+              </>
+            )}
           </div>
-
-          {/* Dashboard Content */}
-          {loading ? (
-            <Loading />
-          ) : (
-            <main className="flex flex-col items-center w-full">
-              <InputForm
-                currentLocation={currentLocation}
-                handleInput={handleInput}
-                handleLocation={handleLocation}
-              />
-              <div className="mt-8">
-                <Menu
-                  menuSelection={menuSelection}
-                  setMenuSelection={setMenuSelection}
-                />
-              </div>
-              {menuSelection === "current" && (
-                <WeatherCards
-                  displayLocation={displayLocation}
-                  weatherJSON={weatherJSON}
-                  weatherData={weatherData?.current}
-                />
-              )}
-              {menuSelection === "hourly" && weatherData && (
-                <HourlyCard data={weatherData.hourly}></HourlyCard>
-              )}
-              {menuSelection === "daily" && weatherData && (
-                <DailyCard data={weatherData.daily}></DailyCard>
-              )}
-            </main>
-          )}
-
-          {/* Altri contenuti delle schede */}
-          {/* ... */}
-        </div>
-      </div>
-      <Footer />
-    </>
+          <Footer />
+        </>
+      )}
+    </div>
   );
 };
 
