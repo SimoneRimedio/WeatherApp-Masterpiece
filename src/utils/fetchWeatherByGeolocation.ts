@@ -1,7 +1,8 @@
-import { updateWeatherJSON } from "./getImageJSON";
-import { getWeatherData } from "./getWeatherData";
-import { getPosition } from "./getPosition";
-import { WeatherData, WeatherDataJSON, WeatherJSONProps } from "../types/types";
+import { updateWeatherJSON } from '../utils/getImageJSON';
+import { getWeatherData } from '../utils/getWeatherData';
+import { WeatherData, WeatherDataJSON } from '../types/types';
+import { WeatherJSONProps } from '../types/types';
+import axios from 'axios';
 
 interface FetchWeatherParams {
   setCurrentLocation: (location: string) => void;
@@ -11,22 +12,16 @@ interface FetchWeatherParams {
   setError: (error: string | null) => void;
 }
 
-export const fetchWeatherByGeolocation = async ({
-  setCurrentLocation,
-  setWeatherData,
-  setWeatherJSON,
-  data,
-  setError,
-}: FetchWeatherParams): Promise<void> => {
+export const fetchWeatherByGeolocation = async ({ setCurrentLocation, setWeatherData, setWeatherJSON, data, setError }: FetchWeatherParams): Promise<void> => {
   try {
     if (navigator.geolocation) {
       const pos = await new Promise<GeolocationPosition>((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject);
       });
       const { latitude, longitude } = pos.coords;
-      const position = await getPosition(latitude, longitude, setError);
+      const response = await axios.get(`http://localhost:8080/api/getReverseGeocode?lat=${latitude}&lon=${longitude}`);
       const weatherData = await getWeatherData({ latitude, longitude });
-      setCurrentLocation(position.address.town);
+      setCurrentLocation(response.data.address.town);
       setWeatherData(weatherData);
       setWeatherJSON(updateWeatherJSON(weatherData, data));
     } else {
@@ -35,9 +30,7 @@ export const fetchWeatherByGeolocation = async ({
   } catch (error) {
     console.error("Error fetching weather data:", error);
     if (error instanceof GeolocationPositionError) {
-      setError(
-        "Error retrieving location. Make sure you have enabled geolocation in your browser."
-      );
+      setError("Error retrieving location. Make sure you have enabled geolocation in your browser.");
     } else {
       setError("Error fetching weather data.");
     }

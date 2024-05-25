@@ -24,7 +24,7 @@ const InputForm: React.FC<InputFormProps> = ({
         />
         <button
           type="submit"
-          className="ml-2 p-2 bg-details hover:bg-red-500 focus:outline-none focus:bg-red-700 rounded-lg"
+          className="ml-2 p-2 bg-details hover:bg-button-details focus:outline-none focus:bg-button-details rounded-lg"
         >
           <IconSearch className="text-card" />
         </button>
