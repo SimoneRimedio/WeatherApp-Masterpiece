@@ -1,5 +1,6 @@
 import { ReactElement } from "react";
 import Slider from "react-slick";
+import "slick-carousel/slick/slick-theme.css";
 import { WeatherDataType } from "../../types/types";
 
 import imagesData from "../../assets/images.json";
@@ -50,53 +51,17 @@ const DailyCard = ({ data }: DailyCardProps): ReactElement => {
   }
 
   const settings = {
+    className: "slick-slider-custom",
     arrows: true,
-    dots: true,
+    dots: false,
     infinite: false,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
     initialSlide: 0,
-    adaptiveHeight: false,
+    adaptiveHeight: true,
     slidesPerRow: 1,
-    variableWidth: false,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          initialSlide: 3,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
-    ],
-    appendDots: (dots: boolean) => (
-      <div
-        style={{
-          position: "relative",
-          bottom: "10px",
-          marginTop: "50px",
-        }}
-      >
-        <ul className="slick-dots">{dots}</ul>
-      </div>
-    ),
-    customPaging: () => <button>&#9679;</button>,
-    className: "slick-slider-custom",
+    variableWidth: true,
   };
 
   return (
