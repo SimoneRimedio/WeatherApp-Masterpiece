@@ -14,20 +14,20 @@ const WeatherCards: React.FC<WeatherCardsProps> = ({
   weatherData,
 }) => {
   return (
-    <>
-      <h1 className="text-md mb-4 font-Poppins font-bold text-tools ">
+    <div className="flex flex-col justify-center items-center">
+      <h1 className="text-md mb-4 font-Poppins font-bold text-titles">
         {displayLocation}
       </h1>
       <div className="text-center p-4 rounded-lg bg-blur">
         <img
           src={weatherJSON.image}
           alt="weatherIcon"
-          className="w-30 h-30 mb-2"
+          className="w-30 h-30 mb-2 "
         />
-        <h1 className="text-xl mb-4 text-tools">{weatherJSON.description}</h1>
+        <h1 className="text-xl mb-4 text-titles">{weatherJSON.description}</h1>
       </div>
       {weatherData && <CurrentCard data={weatherData}></CurrentCard>}
-    </>
+    </div>
   );
 };
 

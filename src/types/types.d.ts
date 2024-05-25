@@ -7,6 +7,7 @@ export interface WeatherData {
   current: WeatherDataType;
   hourly: WeatherDataType;
   daily: WeatherDataType;
+  timezone: WeatherDataType;
 }
 
 export type WeatherDataType = {
@@ -30,6 +31,7 @@ export type WeatherDataType = {
   windSpeed10m?: Float32Array | number;
   windDirection10m?: number;
   isDay?: number;
+  timezone: string;
 };
 
 export interface WeatherJSONProps {

@@ -28,7 +28,7 @@ const DailyCard = ({ data }: DailyCardProps): ReactElement => {
           key={i}
           className="carousel-item bg-card rounded-lg text-black border-2 border-tools p-4 w-52 h-54 text-center"
         >
-          <h1 className="font-black">
+          <h1 className="font-bold text-2xl">
             {String(time && time[i]).substring(0, 3)}
           </h1>
           <img
@@ -57,6 +57,9 @@ const DailyCard = ({ data }: DailyCardProps): ReactElement => {
     slidesToShow: 4,
     slidesToScroll: 4,
     initialSlide: 0,
+    adaptiveHeight: false,
+    slidesPerRow: 1,
+    variableWidth: false,
     responsive: [
       {
         breakpoint: 1024,
@@ -93,11 +96,17 @@ const DailyCard = ({ data }: DailyCardProps): ReactElement => {
       </div>
     ),
     customPaging: () => <button>&#9679;</button>,
+    className: "slick-slider-custom",
   };
 
   return (
     <div className="mx-auto w-3/4">
-      <h1 className="text-4xl font-extrabold mb-10 mt-20 font-Poppins text-text-header">
+      <style>{`
+        .slick-slider-custom .slick-slide {
+          margin-right: 5px; 
+        }
+      `}</style>
+      <h1 className="text-4xl font-extrabold mb-10 mt-20 font-Poppins text-titles">
         Week Weather
       </h1>
       <Slider {...settings}>{series}</Slider>

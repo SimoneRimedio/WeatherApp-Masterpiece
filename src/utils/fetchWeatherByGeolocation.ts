@@ -22,7 +22,7 @@ export const fetchWeatherByGeolocation = async ({ setCurrentLocation, setWeather
       const { latitude, longitude } = pos.coords;
       const getPosition = await useFetch({ url: `https://geocode.maps.co/reverse?lat=${latitude}&lon=${longitude}&api_key=${Tokens.GeocodeToken}` });
       const weatherData = await getWeatherData({ latitude, longitude });
-      setCurrentLocation(getPosition.data.address.county);
+      setCurrentLocation(getPosition.data.address.town);
       setWeatherData(weatherData);
       setWeatherJSON(updateWeatherJSON(weatherData, data));
     } else {

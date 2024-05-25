@@ -17,14 +17,14 @@ const InputForm: React.FC<InputFormProps> = ({
       <form onSubmit={handleLocation} className="flex items-center my-10 w-96">
         <input
           type="text"
-          className="py-2 px-3 w-full border rounded-lg border-tools-shadow text-card bg-tools focus:outline-none focus:border-blue-500"
+          className="py-2 px-3 w-full border rounded-lg border-tools-shadow text-text bg-tools focus:outline-none focus:border-details text-xl"
           placeholder="Enter location..."
           value={currentLocation}
           onChange={handleInput}
         />
         <button
           type="submit"
-          className="ml-2 p-2 bg-tools hover:bg-tools-shadow focus:outline-none focus:bg-gray-700 rounded-lg"
+          className="ml-2 p-2 bg-details hover:bg-red-500 focus:outline-none focus:bg-red-700 rounded-lg"
         >
           <IconSearch className="text-card" />
         </button>

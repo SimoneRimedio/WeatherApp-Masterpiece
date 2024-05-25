@@ -1,10 +1,4 @@
-import {
-  ReactElement,
-  useState,
-  useEffect,
-  ChangeEvent,
-  FormEvent,
-} from "react";
+import { ReactElement, useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { WeatherData, WeatherDataJSON, WeatherJSONProps } from "./types/types";
 import { Tokens } from "./utils/env";
 import useFetch from "./hooks/useFetch";
@@ -102,11 +96,11 @@ const App = (): ReactElement => {
                     <WeatherCards
                       displayLocation={displayLocation}
                       weatherJSON={weatherJSON}
-                      weatherData={weatherData?.current}
+                      weatherData={weatherData?.current}                      
                     />
                   )}
                   {menuSelection === "hourly" && weatherData && (
-                    <HourlyCard data={weatherData.hourly}></HourlyCard>
+                    <HourlyCard data={weatherData.hourly} timezone={weatherData.timezone}></HourlyCard>
                   )}
                   {menuSelection === "daily" && weatherData && (
                     <DailyCard data={weatherData.daily}></DailyCard>
