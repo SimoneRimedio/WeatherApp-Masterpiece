@@ -1,6 +1,5 @@
 import { ReactElement, useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { WeatherData, WeatherDataJSON, WeatherJSONProps } from "./types/types";
-import { Tokens } from "./utils/env";
 import useFetch from "./hooks/useFetch";
 import data from "./assets/weather.json";
 
@@ -39,10 +38,12 @@ const App = (): ReactElement => {
     event: FormEvent<HTMLFormElement>
   ): Promise<void> => {
     event.preventDefault();
-    const pos = await useFetch({
-      url: `https://geocode.maps.co/search?q=${currentLocation}&api_key=${Tokens.GeocodeToken}`,
-    });
-
+    try {
+      const response = await fetch(`/api/getGeocode?location=${currentLocation}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch location data');
+      }
+    const pos = await response.json();
     const weatherData = await getWeatherData({
       latitude: pos.data[0]?.lat || 0,
       longitude: pos.data[0]?.lon || 0,
