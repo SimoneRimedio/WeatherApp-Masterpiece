@@ -19,8 +19,6 @@ const HourlyCard = ({ data, timezone }: HourlyCardProps): ReactElement => {
 
   useEffect(() => {
     const currentHour = moment.tz(timezone.toString()).hour();
-    console.log(timezone.toString(), currentHour);
-
     setNow(currentHour);
   }, [timezone]);
 

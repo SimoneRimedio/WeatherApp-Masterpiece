@@ -11,7 +11,6 @@ export interface WeatherData {
 }
 
 export type WeatherDataType = {
-  current: WeatherDataType;
   keys: any;
   time: Date | Date[] | string[];
   temperature2m?: Float32Array | number;
@@ -31,7 +30,6 @@ export type WeatherDataType = {
   windSpeed10m?: Float32Array | number;
   windDirection10m?: number;
   isDay?: number;
-  timezone: string;
 };
 
 export interface WeatherJSONProps {

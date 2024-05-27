@@ -4,13 +4,13 @@
 - [ ] Cambiare le immagini 
 
 ## Centrare Bottoni
-- [ ] Migliorare la disposizione dei bottoni 
+- [x] Migliorare la disposizione dei bottoni 
 
 ## Slider
 - [ ] Aggiustare la larghezza dello slider
 
 ## Sicurezza
-- [ ] Risolvere la vulnerabilità di sicurezza
+- [x] Risolvere la vulnerabilità di sicurezza
 
 ## Generale
 - [ ] Verificare la folder structure

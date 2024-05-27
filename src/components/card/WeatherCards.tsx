@@ -18,7 +18,7 @@ const WeatherCards: React.FC<WeatherCardsProps> = ({
       <h1 className="text-md mb-4 font-Poppins font-bold text-titles">
         {displayLocation}
       </h1>
-      <div className="text-center p-4 rounded-lg bg-blur">
+      <div className="flex flex-col justify-center items-center text-center p-4 rounded-lg bg-blur">
         <img
           src={weatherJSON.image}
           alt="weatherIcon"
