@@ -45,7 +45,7 @@ const App = (): ReactElement => {
   ): Promise<void> => {
     event.preventDefault();
     try {
-      const pos = await axios.get(`http://localhost:8080/api/getGeocode?location=${currentLocation}`);
+      const pos = await axios.get(`https://web-production-63be.up.railway.app/api/getGeocode?location=${currentLocation}`);
       console.log(pos);
       
       const weatherData = await getWeatherData({

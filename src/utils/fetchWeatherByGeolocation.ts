@@ -19,7 +19,9 @@ export const fetchWeatherByGeolocation = async ({ setCurrentLocation, setWeather
         navigator.geolocation.getCurrentPosition(resolve, reject);
       });
       const { latitude, longitude } = pos.coords;
-      const response = await axios.get(`http://localhost:8080/api/getReverseGeocode?lat=${latitude}&lon=${longitude}`);
+      const response = await axios.get(`https://web-production-63be.up.railway.app/api/getReverseGeocode?lat=${latitude}&lon=${longitude}`);
+      console.log(response);
+      
       const weatherData = await getWeatherData({ latitude, longitude });
       setCurrentLocation(response.data.address.town);
       setWeatherData(weatherData);
