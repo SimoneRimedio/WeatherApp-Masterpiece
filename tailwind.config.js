@@ -1,19 +1,29 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: 'selector',
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: "selector",
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      fontFamily: {'BebasNeue': 'Bebas Neue', 'Nunito': 'Nunito', 'Poppins': 'Poppins'}
+      backgroundImage: {
+        "background-img": "url('/src/assets/background.jpg')",
+      },
+      blur: {
+        bg: "40px",
+      },
+      fontFamily: {
+        'Poppins':'Poppins',
+      },
     },
     colors: {
-      'bgk': '#E0DDCF',
-      'card': "#F1F0EA",
-      'text-card': '#2D232E',
-      'text-header': '#2D232E',
-      'tools': '#534B52',
-      'tools-shadow': '#474448'
-    }
+      bgk: "#0B1F1D",
+      card: "#FDF7FA",
+      "card-shadow": "#4b5563",
+      text: "#000000",
+      titles: "#FFFFFF",
+      details: "#FF6A1A",
+      "bgk-grd": "#688edf",
+      "button-details": "#c2410c",
+    },
   },
   plugins: [],
-}
+};

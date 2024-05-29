@@ -16,6 +16,7 @@ const weatherApi = async ({ latitude, longitude }: GetWeatherProps): Promise<Wea
   const current = responses[0].current()!;
   const hourly = responses[0].hourly()!;
   const daily = responses[0].daily()!;
+  const timezone = responses[0].timezone();
   
   const range = (start: number, stop: number, step: number) => {
     return Array.from({ length: (stop - start) / step }, (_, i) => start + i * step);
@@ -57,9 +58,16 @@ const weatherApi = async ({ latitude, longitude }: GetWeatherProps): Promise<Wea
       weatherCode: daily.variables(3)!.valuesArray()!,
       keys: undefined
     },
+    timezone: timezone?.valueOf(),
   };
   
   return weatherData;
 };
 
-export default weatherApi;
+const getWeatherData = async ({ latitude, longitude }: { latitude: number; longitude: number }): Promise<WeatherData> => {
+  const weatherData = await weatherApi({ latitude, longitude });
+  return weatherData;
+};
+
+
+export default getWeatherData;

@@ -1,0 +1,18 @@
+{
+    "America/Anchorage": "-8",
+    "America/Los_Angeles": "-7",
+    "America/Denver": "-6",
+    "America/Chicago": "-5",
+    "America/New_York": "-4",
+    "America/Sao_Paulo": "-3",
+    "Europe/London": "+0",
+    "Europe/Berlin": "+1",
+    "Europe/Moscow": "+3",
+    "Europe/Rome": "+1",
+    "Africa/Cairo": "+2",
+    "Asia/Bangkok": "+7",
+    "Asia/Singapore": "+8",
+    "Asia/Tokyo": "+9",
+    "Australia/Sydney": "+10",
+    "Pacific/Auckland": "+12"
+  }

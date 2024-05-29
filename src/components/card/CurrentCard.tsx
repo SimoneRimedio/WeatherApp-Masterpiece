@@ -1,14 +1,7 @@
 import { ReactElement } from "react";
-import { WeatherDataType } from "../types/types";
-import cardinalConv from "../utils/cardinalConversion";
-import {
-  IconTemperature,
-  IconDroplet,
-  IconThermometer,
-  IconArrowDownToArc,
-  IconWind,
-  IconWindsock,
-} from "@tabler/icons-react";
+import { WeatherDataType } from "../../types/types";
+import cardinalConv from "../../utils/cardinalConversion";
+import { IconTemperature, IconDroplet, IconThermometer, IconArrowDownToArc, IconWind, IconWindsock } from "@tabler/icons-react";
 
 interface CurrentCardProps {
   data: WeatherDataType;
@@ -58,15 +51,12 @@ const CurrentCard = ({ data }: CurrentCardProps): ReactElement => {
       key === "Wind Direction" ? cardinalConv(value) : parseInt(value);
 
     return (
-      <div
-        key={index}
-        className="bg-card rounded-lg shadow-lg shadow-gray-500 p-4 w-48 h-32 text-center text-text-card"
-      >
-        <p className="text-sm mb-2 ">
+      <div key={index} className="bg-card rounded-lg shadow-lg shadow-card-shadow p-4 w-48 h-32 text-center text-text">
+        <p className="text-md mb-2 font-light font-Poppins">
           {icons}
           {key}
         </p>
-        <h1 className="text-md font-bold">
+        <h1 className="text-lg font-semibold font-Poppins">
           {displayValue} {label}
         </h1>
       </div>
