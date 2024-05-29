@@ -7,7 +7,7 @@ import moment from "moment-timezone";
 
 interface HourlyCardProps {
   data: WeatherDataType;
-  timezone: WeatherDataType;
+  timezone: string | undefined;
 }
 
 const HourlyCard = ({ data, timezone }: HourlyCardProps): ReactElement => {
@@ -18,7 +18,7 @@ const HourlyCard = ({ data, timezone }: HourlyCardProps): ReactElement => {
   const [now, setNow] = useState<number>(0);
 
   useEffect(() => {
-    const currentHour = moment.tz(timezone.toString()).hour();
+    const currentHour = moment.tz(String(timezone)).hour();
     setNow(currentHour);
   }, [timezone]);
 

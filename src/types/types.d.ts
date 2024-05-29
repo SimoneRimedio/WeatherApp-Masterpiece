@@ -7,7 +7,7 @@ export interface WeatherData {
   current: WeatherDataType;
   hourly: WeatherDataType;
   daily: WeatherDataType;
-  timezone: WeatherDataType;
+  timezone: string | undefined;
 }
 
 export type WeatherDataType = {
