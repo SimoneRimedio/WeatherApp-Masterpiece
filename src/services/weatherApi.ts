@@ -64,4 +64,10 @@ const weatherApi = async ({ latitude, longitude }: GetWeatherProps): Promise<Wea
   return weatherData;
 };
 
-export default weatherApi;
+const getWeatherData = async ({ latitude, longitude }: { latitude: number; longitude: number }): Promise<WeatherData> => {
+  const weatherData = await weatherApi({ latitude, longitude });
+  return weatherData;
+};
+
+
+export default getWeatherData;

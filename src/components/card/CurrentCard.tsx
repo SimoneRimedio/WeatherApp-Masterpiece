@@ -52,11 +52,11 @@ const CurrentCard = ({ data }: CurrentCardProps): ReactElement => {
 
     return (
       <div key={index} className="bg-card rounded-lg shadow-lg shadow-card-shadow p-4 w-48 h-32 text-center text-text">
-        <p className="text-md mb-2 ">
+        <p className="text-md mb-2 font-light font-Poppins">
           {icons}
           {key}
         </p>
-        <h1 className="text-lg font-bold">
+        <h1 className="text-lg font-semibold font-Poppins">
           {displayValue} {label}
         </h1>
       </div>

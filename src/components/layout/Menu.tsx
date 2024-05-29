@@ -2,6 +2,7 @@ import React from "react";
 import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import MenuButton from "../../common/Button/MenuButton.tsx";
 
 interface MenuProps {
   menuSelection: string;
@@ -14,30 +15,24 @@ const Menu: React.FC<MenuProps> = ({
 }) => {
   return (
     <div className="flex justify-center items-center mt-5 mb-5 text-lg">
-      <button
+      <MenuButton
+        icon={<QueryBuilderIcon />}
+        label="Current"
+        isSelected={menuSelection === "current"}
         onClick={() => setMenuSelection("current")}
-        className={`text-left mx-2 ${
-          menuSelection === "current" ? "font-bold" : ""
-        } bg-details text-titles hover:bg-button-details focus:outline-none focus:ring-2 focus:ring-button-details font-medium rounded-full text-md px-5 py-2.5 text-center me-2 mb-2`}
-      >
-        <QueryBuilderIcon className="inline-block mb-[3px]" /> Current
-      </button>
-      <button
+      />
+      <MenuButton
+        icon={<CalendarTodayIcon />}
+        label="Hourly"
+        isSelected={menuSelection === "hourly"}
         onClick={() => setMenuSelection("hourly")}
-        className={`text-left mx-2 ${
-          menuSelection === "hourly" ? "font-bold" : ""
-        } bg-details text-titles hover:bg-button-details focus:outline-none focus:ring-2 focus:ring-button-details font-medium rounded-full text-md px-5 py-2.5 text-center me-2 mb-2`}
-      >
-        <CalendarTodayIcon className="inline-block mb-[3px]" /> Hourly
-      </button>
-      <button
+      />
+      <MenuButton
+        icon={<CalendarMonthIcon />}
+        label="Weekly"
+        isSelected={menuSelection === "daily"}
         onClick={() => setMenuSelection("daily")}
-        className={`text-left mx-2 ${
-          menuSelection === "daily" ? "font-bold" : ""
-        } bg-details text-titles hover:bg-button-details focus:outline-none focus:ring-2 focus:ring-button-details font-medium rounded-full text-md px-5 py-2.5 text-center me-2 mb-2`}
-      >
-        <CalendarMonthIcon className="inline-block mb-[3px]" /> Weekly
-      </button>
+      />
     </div>
   );
 };

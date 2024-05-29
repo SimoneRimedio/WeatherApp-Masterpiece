@@ -29,7 +29,7 @@ const DailyCard = ({ data }: DailyCardProps): ReactElement => {
           key={i}
           className="carousel-item bg-card rounded-lg text-black border-2 border-tools p-4 w-52 h-54 text-center"
         >
-          <h1 className="font-bold text-2xl">
+          <h1 className="font-bold text-xl font-Poppins">
             {String(time && time[i]).substring(0, 3)}
           </h1>
           <img
@@ -38,7 +38,7 @@ const DailyCard = ({ data }: DailyCardProps): ReactElement => {
             src={images[weather_code[i]]}
           ></img>
           <label>Temperature:</label>
-          <p>
+          <p className="font-Poppins font-semibold text-md">
             {parseInt(String(temp_min && temp_min[i]))}° /{" "}
             {parseInt(String(temp_max && temp_max[i]))}°
           </p>
@@ -71,7 +71,7 @@ const DailyCard = ({ data }: DailyCardProps): ReactElement => {
           margin-right: 5px; 
         }
       `}</style>
-      <h1 className="text-4xl font-extrabold mb-10 mt-20 font-Poppins text-titles">
+      <h1 className="text-4xl font-bold mb-10 mt-20 font-Poppins text-titles">
         Week Weather
       </h1>
       <Slider {...settings}>{series}</Slider>

@@ -32,14 +32,16 @@ export type WeatherDataType = {
   isDay?: number;
 };
 
-export interface WeatherJSONProps {
+export interface WeatherImgProps {
   description: string;
   image: string;
 }
 
-export interface WeatherDataJSON {
+export interface WeatherDataImg {
   [key: string]: {
-    day: WeatherJSONProps;
-    night: WeatherJSONProps;
+    day: WeatherImgProps;
+    night: WeatherImgProps;
   };
 }
+
+

@@ -31,8 +31,8 @@ const HourlyCard = ({ data, timezone }: HourlyCardProps): ReactElement => {
         key={i}
         className="carousel-item flex flex-col bg-card rounded-lg shadow-md shadow-card-shadow text-text p-4 w-52 h-38 text-center"
       >
-        <h1 className="font-bold text-xl mt-2">{index}:00</h1>
-        <p className="mt-2">{parseInt(String(temp[i])) + "° C"}</p>
+        <h1 className="font-bold font-Poppins text-xl mt-2">{index}:00</h1>
+        <p className="mt-2 font-Poppins font-medium">{parseInt(String(temp[i])) + "° C"}</p>
         <p>{parseInt(String(prob[index])) + " %"}</p>
         <p>{parseInt(String(wind[index])) + " Km/h"}</p>
       </div>
@@ -62,7 +62,7 @@ const HourlyCard = ({ data, timezone }: HourlyCardProps): ReactElement => {
         padding: 5px;
         }
     `}</style>
-      <h1 className="text-4xl font-extrabold my-20 font-Poppins text-titles">
+      <h1 className="text-4xl font-bold my-20 font-Poppins text-titles">
         24h Weather
       </h1>
       <Slider {...settings}>{series}</Slider>

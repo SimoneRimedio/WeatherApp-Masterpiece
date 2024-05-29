@@ -11,9 +11,7 @@ export default {
         bg: "40px",
       },
       fontFamily: {
-        BebasNeue: "Bebas Neue",
-        Nunito: "Nunito",
-        Poppins: "Poppins",
+        'Poppins':'Poppins',
       },
     },
     colors: {

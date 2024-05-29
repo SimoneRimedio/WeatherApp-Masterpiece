@@ -14,7 +14,7 @@ const InputForm: React.FC<InputFormProps> = ({
 }) => {
   return (
     <>
-      <form onSubmit={handleLocation} className="flex items-center my-10 w-96">
+      <form id="searchBar" onSubmit={handleLocation} className="flex items-center my-10 w-96">
         <input
           type="text"
           className="py-2 px-3 w-full border rounded-lg border-tools-shadow text-text bg-tools focus:outline-none focus:border-details text-xl"
@@ -26,7 +26,7 @@ const InputForm: React.FC<InputFormProps> = ({
           type="submit"
           className="ml-2 p-2 bg-details hover:bg-button-details focus:outline-none focus:bg-button-details rounded-lg"
         >
-          <IconSearch className="text-card" />
+          <IconSearch className="text-card font-black" />
         </button>
       </form>
     </>
