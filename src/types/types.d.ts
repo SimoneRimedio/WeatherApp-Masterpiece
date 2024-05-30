@@ -11,7 +11,6 @@ export interface WeatherData {
 }
 
 export type WeatherDataType = {
-  map(arg0: (data: any, index: any) => import("react/jsx-runtime").JSX.Element): import("react").ReactNode;
   keys: any;
   time: Date | Date[] | string[];
   temperature2m?: Float32Array | number;
