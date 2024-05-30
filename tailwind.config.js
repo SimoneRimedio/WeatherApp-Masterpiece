@@ -3,6 +3,13 @@ export default {
   darkMode: "selector",
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    screens: {
+      sm: "380px",
+      md: "580px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536px",
+    },
     extend: {
       backgroundImage: {
         "background-img": "url('/src/assets/background.jpg')",
@@ -11,7 +18,7 @@ export default {
         bg: "40px",
       },
       fontFamily: {
-        'Poppins':'Poppins',
+        Poppins: "Poppins",
       },
     },
     colors: {

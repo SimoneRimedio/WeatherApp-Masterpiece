@@ -51,17 +51,34 @@ const HourlyCard = ({ data, timezone }: HourlyCardProps): ReactElement => {
     initialSlide: 0,
     slidesPerRow: 1,
     variableWidth: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+    gap: 20,
   };
 
   return (
     <div className="mx-auto w-3/4">
-      <style>{`
-        .slick-slider-custom .slick-slide {
-        width: 200px;
-        margin-right: 2px;
-        padding: 5px;
-        }
-    `}</style>
       <h1 className="text-4xl font-bold my-20 font-Poppins text-titles">
         24h Weather
       </h1>

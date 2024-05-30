@@ -9,30 +9,29 @@ interface MenuProps {
   setMenuSelection: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Menu: React.FC<MenuProps> = ({
-  menuSelection,
-  setMenuSelection,
-}) => {
+const Menu: React.FC<MenuProps> = ({ menuSelection, setMenuSelection }) => {
   return (
-    <div className="flex justify-center items-center mt-5 mb-5 text-lg">
-      <MenuButton
-        icon={<QueryBuilderIcon />}
-        label="Current"
-        isSelected={menuSelection === "current"}
-        onClick={() => setMenuSelection("current")}
-      />
-      <MenuButton
-        icon={<CalendarTodayIcon />}
-        label="Hourly"
-        isSelected={menuSelection === "hourly"}
-        onClick={() => setMenuSelection("hourly")}
-      />
-      <MenuButton
-        icon={<CalendarMonthIcon />}
-        label="Weekly"
-        isSelected={menuSelection === "daily"}
-        onClick={() => setMenuSelection("daily")}
-      />
+    <div className="flex justify-center items-center mt-8 mb-5 text-xl">
+      <div className="flex flex-col sm:flex-row md:gap-4">
+        <MenuButton
+          icon={<QueryBuilderIcon />}
+          label="Current"
+          isSelected={menuSelection === "current"}
+          onClick={() => setMenuSelection("current")}
+        />
+        <MenuButton
+          icon={<CalendarTodayIcon />}
+          label="Hourly"
+          isSelected={menuSelection === "hourly"}
+          onClick={() => setMenuSelection("hourly")}
+        />
+        <MenuButton
+          icon={<CalendarMonthIcon />}
+          label="Weekly"
+          isSelected={menuSelection === "daily"}
+          onClick={() => setMenuSelection("daily")}
+        />
+      </div>
     </div>
   );
 };
