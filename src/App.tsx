@@ -24,9 +24,6 @@ const App = (): ReactElement => {
     setMenuSelection,
   } = useWeather();
 
-  const locationAccessDenied =
-    error === "Permission to access location was denied.";
-
   return (
     <div className="min-h-screen flex flex-col">
       {loading ? (
@@ -72,17 +69,7 @@ const App = (): ReactElement => {
           <Footer />
         </>
       )}
-      {error && !locationAccessDenied && (
-        <div className="w-full flex justify-center items-center">
-          <Alert
-            severity="error"
-            sx={{ textAlign: "center", fontFamily: "Poppins, sans-serif" }}
-          >
-            {error}
-          </Alert>
-        </div>
-      )}
-      {locationAccessDenied && (
+      {error && (
         <div className="w-full flex justify-center items-center">
           <Alert
             severity="error"
