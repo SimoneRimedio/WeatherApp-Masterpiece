@@ -1,7 +1,7 @@
 # Lista Attività da Fare
 
 ## Immagini
-- [x] Cambiare le immagini 
+- [ ] Cambiare le immagini 
 
 ## Centrare Bottoni
 - [x] Migliorare la disposizione dei bottoni 

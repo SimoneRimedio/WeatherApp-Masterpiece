@@ -14,7 +14,7 @@ const Menu: React.FC<MenuProps> = ({
   setMenuSelection,
 }) => {
   return (
-    <div className="flex justify-center items-center mt-5 mb-5 text-lg">
+    <div className="flex justify-center items-center mt-8 mb-5 text-lg">
       <MenuButton
         icon={<QueryBuilderIcon />}
         label="Current"

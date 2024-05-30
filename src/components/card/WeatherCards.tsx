@@ -22,7 +22,7 @@ const WeatherCards: React.FC<WeatherCardsProps> = ({
         <img
           src={weatherImg.image}
           alt="weatherIcon"
-          className="w-20 h-20 mb-2 flex-shrink-0"
+          className="w-30 h-30 mb-2"
         />
         <h1 className="text-xl mb-4 text-titles font-Poppins font-semibold">{weatherImg.description}</h1>
       </div>
