@@ -1,10 +1,9 @@
 import { ReactElement, useEffect, useState } from "react";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { WeatherDataType } from "../../types/types";
 import moment from "moment-timezone";
-import '../../index.css';
+import "../../index.css";
 
 interface HourlyCardProps {
   data: WeatherDataType;
@@ -13,7 +12,8 @@ interface HourlyCardProps {
 
 const HourlyCard = ({ data, timezone }: HourlyCardProps): ReactElement => {
   const temp: number[] = (data.temperature2m as unknown as number[]) ?? [];
-  const prob: number[] = (data.precipitationProbability as unknown as number[]) ?? [];
+  const prob: number[] =
+    (data.precipitationProbability as unknown as number[]) ?? [];
   const wind: number[] = (data.windSpeed10m as unknown as number[]) ?? [];
 
   const [now, setNow] = useState<number>(0);
@@ -31,34 +31,21 @@ const HourlyCard = ({ data, timezone }: HourlyCardProps): ReactElement => {
         className="carousel-item flex flex-col bg-card rounded-lg shadow-md shadow-card-shadow text-text p-4 w-52 h-38 text-center"
       >
         <h1 className="font-bold font-Poppins text-xl mt-2">{index}:00</h1>
-        <p className="mt-2 font-Poppins font-medium">{parseInt(String(temp[index])) + "° C"}</p>
+        <p className="mt-2 font-Poppins font-medium">
+          {parseInt(String(temp[index])) + "° C"}
+        </p>
         <p>{parseInt(String(prob[index])) + " %"}</p>
         <p>{parseInt(String(wind[index])) + " Km/h"}</p>
       </div>
     );
   });
 
-  const settings = {
-    className: "slick-slider-custom",
-    arrows: true,
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 3,
-    initialSlide: 0,
-    slidesPerRow: 1,
-    variableWidth: true,
-    slidesMargin: 50, 
-    css: `.slick-slide`
-  };
-
   return (
     <div className="mx-auto w-3/4">
-      <h1 className="text-4xl font-bold my-20 font-Poppins text-titles">
+      <h1 className="text-3xl font-bold my-20 font-Poppins text-titles">
         24h Weather
       </h1>
-      <Slider {...settings}>{series}</Slider>
+      <div>{series}</div>
     </div>
   );
 };

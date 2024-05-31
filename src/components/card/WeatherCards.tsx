@@ -15,7 +15,7 @@ const WeatherCards: React.FC<WeatherCardsProps> = ({
 }) => {
   return (
     <div className="flex flex-col justify-center items-center">
-      <h1 className="text-md mb-4 font-Poppins font-semibold text-titles">
+      <h1 className="text mb-4 font-Poppins font-semibold text-titles">
         {displayLocation}
       </h1>
       <div className="flex flex-col justify-center items-center text-center p-4 rounded-lg bg-blur">

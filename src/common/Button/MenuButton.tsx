@@ -1,27 +1,22 @@
 import React from "react";
 
 interface MenuButtonProps {
-  icon: React.ReactNode;
   label: string;
   isSelected: boolean;
   onClick: () => void;
 }
 
 const MenuButton: React.FC<MenuButtonProps> = ({
-  icon,
   label,
-  isSelected,
   onClick,
 }) => {
   return (
-    <button
-      onClick={onClick}
-      className={`text-left mx-2 ${
-        isSelected ? "font-bold" : ""
-      } bg-details text-card hover:bg-button-details focus:outline-none focus:ring-2 focus:ring-button-details font-semibold font-Poppins rounded-full text-md px-5 py-2.5 text-center me-2 mb-2`}
-    >
-      <span className="inline-block mb-[3px]">{icon}</span> {label}
-    </button>
+      <button className="relative" onClick={onClick}>
+        <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-card-shadow "></span>
+        <span className="fold-semibold font-Poppins relative inline-block h-full w-full rounded border-2 border-text bg-card px-3 py-1 text-base font-bold text-text transition duration-100  hover:bg-details">
+         {label}
+        </span>
+      </button>
   );
 };
 
