@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { WeatherDataType } from "../../types/types";
 import moment from "moment-timezone";
+import '../../index.css';
 
 interface HourlyCardProps {
   data: WeatherDataType;
@@ -22,23 +23,20 @@ const HourlyCard = ({ data, timezone }: HourlyCardProps): ReactElement => {
     setNow(currentHour);
   }, [timezone]);
 
-  const series: JSX.Element[] = [];
-
-  for (let i = now; series.length < 24; i++) {
-    const index = i % 24;
-    const seriesDiv = (
+  const series = Array.from({ length: 24 }, (_, i) => {
+    const index = (now + i) % 24;
+    return (
       <div
         key={i}
         className="carousel-item flex flex-col bg-card rounded-lg shadow-md shadow-card-shadow text-text p-4 w-52 h-38 text-center"
       >
         <h1 className="font-bold font-Poppins text-xl mt-2">{index}:00</h1>
-        <p className="mt-2 font-Poppins font-medium">{parseInt(String(temp[i])) + "° C"}</p>
+        <p className="mt-2 font-Poppins font-medium">{parseInt(String(temp[index])) + "° C"}</p>
         <p>{parseInt(String(prob[index])) + " %"}</p>
         <p>{parseInt(String(wind[index])) + " Km/h"}</p>
       </div>
     );
-    series.push(seriesDiv);
-  }
+  });
 
   const settings = {
     className: "slick-slider-custom",
@@ -47,34 +45,12 @@ const HourlyCard = ({ data, timezone }: HourlyCardProps): ReactElement => {
     infinite: false,
     speed: 500,
     slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToScroll: 3,
     initialSlide: 0,
     slidesPerRow: 1,
     variableWidth: true,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-    gap: 20,
+    slidesMargin: 50, 
+    css: `.slick-slide`
   };
 
   return (

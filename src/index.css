@@ -5,6 +5,14 @@
 @tailwind utilities;
 
 body {
-  @apply m-0 bg-gradient-to-br from-bgk to-bgk-grd
-  ;
+  @apply m-0 bg-bgk;
 }
+
+.slick-slide {
+  margin: 0 5px;
+  display: inline-block;
+  overflow-x: auto;
+  vertical-align: center; 
+  white-space: nowrap;
+}
+

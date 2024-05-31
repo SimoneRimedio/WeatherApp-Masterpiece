@@ -18,7 +18,7 @@ const MenuButton: React.FC<MenuButtonProps> = ({
       onClick={onClick}
       className={`text-left mx-2 ${
         isSelected ? "font-bold" : ""
-      } bg-details text-titles hover:bg-button-details focus:outline-none focus:ring-2 focus:ring-button-details font-semibold font-Poppins rounded-full text-md px-5 py-2.5 text-center me-2 mb-2`}
+      } bg-details text-card hover:bg-button-details focus:outline-none focus:ring-2 focus:ring-button-details font-semibold font-Poppins rounded-full text-md px-5 py-2.5 text-center me-2 mb-2`}
     >
       <span className="inline-block mb-[3px]">{icon}</span> {label}
     </button>
