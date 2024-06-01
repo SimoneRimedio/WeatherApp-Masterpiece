@@ -1,5 +1,5 @@
 import React from "react";
-import MenuButton from "../../common/Button/MenuButton.tsx";
+import MenuButton from "../common/buttons/MenuButton";
 
 interface MenuProps {
   menuSelection: string;

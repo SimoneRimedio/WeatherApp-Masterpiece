@@ -4,10 +4,10 @@ import Footer from "./components/layout/Footer";
 import Header from "./components/layout/Header";
 import Menu from "./components/layout/Menu";
 import InputForm from "./components/layout/InputForm";
-import DailyCard from "./components/card/DailyCard";
-import HourlyCard from "./components/card/HourlyCard";
-import WeatherCards from "./components/card/WeatherCards";
-import Loading from "./common/Loader/LoaderComponent";
+import DailyCard from "./components/common/cards/DailyCard";
+import HourlyCard from "./components/common/cards/HourlyCard";
+import WeatherCards from "./components/common/cards/WeatherCards";
+import Loading from "./components/common/loader/LoaderComponent";
 import Alert from "@mui/material/Alert";
 
 const App = (): ReactElement => {

@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
-import { WeatherDataType } from "../../types/types";
-import imagesData from "../../assets/images.json";
+import { WeatherDataType } from "../../../types/types";
+import imagesData from "../../../assets/images.json";
 
 const images: Images = imagesData;
 type Images = { [key: number]: string };
@@ -50,20 +50,20 @@ const DailyCard = ({ data }: DailyCardProps): ReactElement => {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <h1 className="text-3xl font-bold my-12 font-Poppins text-titles">
+      <h1 className="text-3xl font-bold my-12 font-Poppins text-dark dark:text-light">
         Week Weather
       </h1>
       <div className="flex flex-col justify-center p-3 mx-4">
         <table className="table-fixed font-Poppins sm:text-xs md:text-xs">
           <thead className="text-center">
-            <tr className="text-md font-bold text-titles">
+            <tr className="text-md font-bold text-dark dark:text-light">
               <th className="px-4 py-2">Day</th>
               <th className="px-4 py-2">Weather</th>
               <th className="px-4 py-2">Temperature</th>
               <th className="px-4 py-2">Precipitation</th>
             </tr>
           </thead>
-          <tbody className="">{tableRows}</tbody>
+          <tbody className=" text-dark dark:text-light">{tableRows}</tbody>
         </table>
       </div>
     </div>

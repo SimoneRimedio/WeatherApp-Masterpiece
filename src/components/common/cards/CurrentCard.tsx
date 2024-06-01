@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
-import { WeatherDataType } from "../../types/types";
-import cardinalConv from "../../utils/cardinalConversion";
+import { WeatherDataType } from "../../../types/types";
+import cardinalConv from "../../../utils/cardinalConversion";
 import {
   IconTemperature,
   IconDroplet,

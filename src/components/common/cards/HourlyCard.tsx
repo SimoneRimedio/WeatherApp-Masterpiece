@@ -1,9 +1,6 @@
 import { ReactElement, useEffect, useState } from "react";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { WeatherDataType } from "../../types/types";
+import { WeatherDataType } from "../../../types/types";
 import moment from "moment-timezone";
-import "../../index.css";
 
 interface HourlyCardProps {
   data: WeatherDataType;
@@ -26,26 +23,21 @@ const HourlyCard = ({ data, timezone }: HourlyCardProps): ReactElement => {
   const series = Array.from({ length: 24 }, (_, i) => {
     const index = (now + i) % 24;
     return (
-      <div
-        key={i}
-        className="carousel-item flex flex-col bg-card rounded-lg shadow-md shadow-card-shadow text-text p-4 w-52 h-38 text-center"
-      >
-        <h1 className="font-bold font-Poppins text-xl mt-2">{index}:00</h1>
-        <p className="mt-2 font-Poppins font-medium">
-          {parseInt(String(temp[index])) + "° C"}
-        </p>
-        <p>{parseInt(String(prob[index])) + " %"}</p>
-        <p>{parseInt(String(wind[index])) + " Km/h"}</p>
+      <div key={i} className="flex flex-col h-36 px-6 py-3 text-center border bg-light text-dark rounded-md">
+        <h1 className="font-bold font-Poppins text-sm mb-4">{index}:00</h1>
+        <p className="text-md font-bold font-Poppins">{parseInt(String(temp[index])) + "° C"}</p>
+        <p className="text-md font-medium font-Poppins">{parseInt(String(prob[index])) + " %"}</p>
+        <p className="text-md font-medium font-Poppins">{parseInt(String(wind[index])) + " Km/h"}</p>
       </div>
     );
   });
 
   return (
-    <div className="mx-auto w-3/4">
-      <h1 className="text-3xl font-bold my-20 font-Poppins text-titles">
+    <div className="flex flex-col justify-center items-center">
+      <h1 className="text-3xl font-bold my-20 font-Poppins text-dark dark:text-light">
         24h Weather
       </h1>
-      <div>{series}</div>
+      <div className="flex flex-row overflow-x-scroll scroll-smooth whitespace-nowrap snap-proximity w-96 h-44 gap-2">{series}</div>
     </div>
   );
 };

@@ -5,14 +5,7 @@
 @tailwind utilities;
 
 body {
-  @apply m-0 bg-bgk;
+  @apply m-0 bg-light dark:bg-dark;
 }
 
-.slick-slide {
-  margin: 0 5px;
-  display: inline-block;
-  overflow-x: auto;
-  vertical-align: center; 
-  white-space: nowrap;
-}
 
