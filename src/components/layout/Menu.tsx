@@ -1,8 +1,5 @@
 import React from "react";
-import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import MenuButton from "../../common/Button/MenuButton.tsx";
+import MenuButton from "../common/buttons/MenuButton";
 
 interface MenuProps {
   menuSelection: string;
@@ -11,22 +8,19 @@ interface MenuProps {
 
 const Menu: React.FC<MenuProps> = ({ menuSelection, setMenuSelection }) => {
   return (
-    <div className="flex justify-center items-center mt-8 mb-5 text-xl">
-      <div className="flex flex-col sm:flex-row md:gap-4">
+    <div className="flex justify-center items-center my-8 text-xl">
+      <div className="flex flex-col sm:flex-row md:gap-4 sm:gap-3">
         <MenuButton
-          icon={<QueryBuilderIcon />}
           label="Current"
           isSelected={menuSelection === "current"}
           onClick={() => setMenuSelection("current")}
         />
         <MenuButton
-          icon={<CalendarTodayIcon />}
           label="Hourly"
           isSelected={menuSelection === "hourly"}
           onClick={() => setMenuSelection("hourly")}
         />
         <MenuButton
-          icon={<CalendarMonthIcon />}
           label="Weekly"
           isSelected={menuSelection === "daily"}
           onClick={() => setMenuSelection("daily")}

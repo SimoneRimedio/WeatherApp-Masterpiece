@@ -5,6 +5,7 @@
 @tailwind utilities;
 
 body {
-  @apply m-0 bg-gradient-to-br from-bgk to-bgk-grd
-  ;
+  @apply m-0 bg-light dark:bg-dark;
 }
+
+

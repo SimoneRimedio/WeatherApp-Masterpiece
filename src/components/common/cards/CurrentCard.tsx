@@ -1,7 +1,14 @@
 import { ReactElement } from "react";
-import { WeatherDataType } from "../../types/types";
-import cardinalConv from "../../utils/cardinalConversion";
-import { IconTemperature, IconDroplet, IconThermometer, IconArrowDownToArc, IconWind, IconWindsock } from "@tabler/icons-react";
+import { WeatherDataType } from "../../../types/types";
+import cardinalConv from "../../../utils/cardinalConversion";
+import {
+  IconTemperature,
+  IconDroplet,
+  IconThermometer,
+  IconArrowDownToArc,
+  IconWind,
+  IconWindsock,
+} from "@tabler/icons-react";
 
 interface CurrentCardProps {
   data: WeatherDataType;
@@ -18,7 +25,7 @@ interface IconsLabels {
 const IconsLabels: IconsLabels = {
   Temperature: <IconTemperature />,
   Humidity: <IconDroplet />,
-  "Apparent Temperature": <IconThermometer />,
+  "Apparent T.": <IconThermometer />,
   Pressure: <IconArrowDownToArc />,
   "Wind Speed": <IconWind />,
   "Wind Direction": <IconWindsock />,
@@ -27,7 +34,7 @@ const IconsLabels: IconsLabels = {
 const unitLabels: UnitLabels = {
   Temperature: "° C",
   Humidity: "%",
-  "Apparent Temperature": "° C",
+  "Apparent T.": "° C",
   Pressure: "mbar",
   "Wind Speed": "Km/h",
   "Wind Direction": "",
@@ -37,7 +44,7 @@ const CurrentCard = ({ data }: CurrentCardProps): ReactElement => {
   const dataMap: { [key: string]: any } = {
     Temperature: data.temperature2m,
     Humidity: data.relativeHumidity2m,
-    "Apparent Temperature": data.apparentTemperature,
+    "Apparent T.": data.apparentTemperature,
     Pressure: data.surfacePressure,
     "Wind Speed": data.windSpeed10m,
     "Wind Direction": data.windDirection10m,
@@ -51,20 +58,23 @@ const CurrentCard = ({ data }: CurrentCardProps): ReactElement => {
       key === "Wind Direction" ? cardinalConv(value) : parseInt(value);
 
     return (
-      <div key={index} className="bg-card rounded-lg shadow-lg shadow-card-shadow p-2 w-48 h-32 text-center text-text">
-        <p className="text-md mb-2 font-light font-Poppins">
-          {icons}
-          {key}
-        </p>
-        <h1 className="text-lg font-semibold font-Poppins">
-          {displayValue} {label}
-        </h1>
+      <div
+        key={index}
+        className="bg-card rounded-lg shadow-sm shadow-card-shadow text-center text-text w-36 h-36 flex flex-col"
+      >
+        <div className="self-start p-2">{icons}</div>
+        <div className="flex flex-col justify-center items-center m-1 p-1">
+          <p className="text-md font-light font-Poppins">{key}</p>
+          <h1 className="text-lg font-semibold font-Poppins">
+            {displayValue} {label}
+          </h1>
+        </div>
       </div>
     );
   });
 
   return (
-    <div className="flex justify-center content-center mt-10 flex-wrap gap-2">
+    <div className="flex justify-center content-center mt-10 flex-wrap gap-3">
       {series}
     </div>
   );

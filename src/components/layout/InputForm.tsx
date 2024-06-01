@@ -14,17 +14,17 @@ const InputForm: React.FC<InputFormProps> = ({
 }) => {
   return (
     <>
-      <form id="searchBar" onSubmit={handleLocation} className="flex items-center my-10 w-96">
+      <form id="searchBar" onSubmit={handleLocation} className="flex items-center my-10 lg:w-96 md:w-72 sm:w-72">
         <input
           type="text"
-          className="py-2 px-3 w-full border rounded-lg border-tools-shadow text-text bg-tools focus:outline-none focus:border-details text-xl"
+          className="py-2 px-3 w-full border-2 rounded-lg border-tools-shadow text-text bg-tools focus:outline-none focus:border-button-details text-xl"
           placeholder="Enter location..."
           value={currentLocation}
           onChange={handleInput}
         />
         <button
           type="submit"
-          className="ml-2 p-2 bg-details hover:bg-button-details focus:outline-none focus:bg-button-details rounded-lg"
+          className="ml-2 px-2 py-2 bg-details hover:bg-button-details focus:outline-none focus:bg-button-details rounded-lg"
         >
           <IconSearch className="text-card font-black" />
         </button>

@@ -1,18 +1,7 @@
 # Lista Attività da Fare
 
-## Immagini
-- [ ] Cambiare le immagini 
-
-## Centrare Bottoni
-- [x] Migliorare la disposizione dei bottoni 
-
-## Slider
-- [ ] Aggiustare la larghezza dello slider
-
-## Sicurezza
-- [x] Risolvere la vulnerabilità di sicurezza
-
-## Generale
-- [ ] Verificare la folder structure
-- [ ] Aggiornare la documentazione
-- [ ] Effettuare un controllo di qualità sul codice
+- [ ] Cambiare le immagini
+- [ ] Stilizzare la scrollbar
+- [x] Settare il tema scuro
+- [ ] impostare il luogo preselezionato
+- [ ] aggiungere i crediti
