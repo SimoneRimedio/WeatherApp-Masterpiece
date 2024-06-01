@@ -3,5 +3,6 @@
 - [ ] Cambiare le immagini
 - [ ] Stilizzare la scrollbar
 - [x] Settare il tema scuro
-- [ ] impostare il luogo preselezionato
-- [ ] aggiungere i crediti
+- [x] impostare il luogo preselezionato
+- [x] aggiungere i crediti
+- [ ] stilizzare input form

@@ -9,8 +9,7 @@ interface HourlyCardProps {
 
 const HourlyCard = ({ data, timezone }: HourlyCardProps): ReactElement => {
   const temp: number[] = (data.temperature2m as unknown as number[]) ?? [];
-  const prob: number[] =
-    (data.precipitationProbability as unknown as number[]) ?? [];
+  const prob: number[] = (data.precipitationProbability as unknown as number[]) ?? [];
   const wind: number[] = (data.windSpeed10m as unknown as number[]) ?? [];
 
   const [now, setNow] = useState<number>(0);
