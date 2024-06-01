@@ -60,7 +60,7 @@ const CurrentCard = ({ data }: CurrentCardProps): ReactElement => {
     return (
       <div
         key={index}
-        className="bg-card rounded-lg shadow-sm shadow-card-shadow text-center text-text w-36 h-36 flex flex-col"
+        className="bg-card rounded-lg shadow-sm shadow-dark dark:shadow-light text-center text-text w-36 h-36 flex flex-col"
       >
         <div className="self-start p-2">{icons}</div>
         <div className="flex flex-col justify-center items-center m-1 p-1">

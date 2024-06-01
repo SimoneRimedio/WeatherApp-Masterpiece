@@ -11,7 +11,10 @@ const useWeather = () => {
   const [weatherData, setWeatherData] = useState<WeatherData>();
   const [currentLocation, setCurrentLocation] = useState("");
   const [displayLocation, setDisplayLocation] = useState("");
-  const [weatherImg, setWeatherImg] = useState<WeatherImgProps>({ description: "", image: "" });
+  const [weatherImg, setWeatherImg] = useState<WeatherImgProps>({
+    description: "",
+    image: "",
+  });
   const [menuSelection, setMenuSelection] = useState("current");
   const [error, setError] = useState<string | null>(null);
 
@@ -41,15 +44,24 @@ const useWeather = () => {
   const checkPosition = async () => {
     try {
       setLoading(true);
+
       const pos = await getGeolocation();
       const { latitude, longitude } = pos.coords;
-      
-      const reverseGeocodeResponse = await getReverseGeocode(latitude, longitude);
+
+      const reverseGeocodeResponse = await getReverseGeocode(
+        latitude,
+        longitude
+      );
+      const address = reverseGeocodeResponse.data.address;
+      const country = reverseGeocodeResponse.data.address.country;
+      const location = address.town || address.city || "Unknown location";
+
       const weatherData = await getWeatherData({ latitude, longitude });
 
-      setCurrentLocation(reverseGeocodeResponse.data.address.town);
+      setCurrentLocation(location);
       setWeatherData(weatherData);
       setWeatherImg(updateWeatherImg(weatherData, data));
+      setDisplayLocation(`${location}, ${country}`);
     } catch (error: any) {
       const errorMessage = handleGeolocationError(error);
       setError(errorMessage);

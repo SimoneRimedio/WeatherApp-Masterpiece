@@ -17,13 +17,11 @@ export default {
     },
     colors: {
       card: "#FDF7FA",
-      "card-shadow": "#4b5563",
       details: "#FF6A1A",
-      "bgk-grd": "#688edf",
       "button-details": "#c2410c",
-      "light":"#F5F5F5",
-      "dark":"#292524",
+      light: "#F5F5F5",
+      dark: "#292524",
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };
