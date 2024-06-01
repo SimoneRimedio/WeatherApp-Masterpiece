@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
-import { WeatherDataType } from "../../types/types";
-import imagesData from "../../assets/images.json";
+import { WeatherDataType } from "../../../types/types";
+import imagesData from "../../../assets/images.json";
 
 const images: Images = imagesData;
 type Images = { [key: number]: string };
@@ -22,50 +22,48 @@ const DailyCard = ({ data }: DailyCardProps): ReactElement => {
   if (weather_code instanceof Float32Array) {
     for (let i: number = 0; i < 7; i++) {
       tableRows.push(
-        <tr key={i} className="text-titles text-md text-2xl text-center">
-          <td className="px-4 py-2 md:px-6 md:py-4">
+        <tr key={i} className="text-center">
+          <td className="font-semibold text-l">
             {String(time && time[i]).substring(0, 3)}
           </td>
-          <td className="px-4 py-2 md:px-6 md:py-4">
+          <td className="flex justify-center">
             <img
-              className="mx-auto w-16 h-auto"
+              className="w-16 bg-opacity-10"
               alt="weatherImage"
               src={images[weather_code[i]]}
             ></img>
           </td>
-          <td className="px-4 py-2 md:px-6 md:py-4">
-            <span className="text-lg font-bold">
+          <td className="">
+            <span className="font-bold text-l">
               {parseInt(String(temp_min && temp_min[i]))}°
-            </span>{" "}
+            </span>
             /{" "}
-            <span className="text-lg font-bold">
+            <span className="font-bold text-l">
               {parseInt(String(temp_max && temp_max[i]))}°
             </span>
           </td>
-          <td className="px-4 py-2">
-            {parseInt(String(prob_max && prob_max[i]))} %
-          </td>
+          <td className="">{parseInt(String(prob_max && prob_max[i]))} %</td>
         </tr>
       );
     }
   }
 
   return (
-    <div className="flex flex-col justify-center content-center items-center">
-      <h1 className="text-4xl font-bold mb-10 mt-10 font-Poppins text-titles">
+    <div className="flex flex-col justify-center items-center">
+      <h1 className="text-3xl font-bold my-12 font-Poppins text-dark dark:text-light">
         Week Weather
       </h1>
-      <div className="overflow-x-auto w-full">
-        <table className="table-auto lg:w-full md:w-2/3 sm:w-full">
-          <thead>
-            <tr className="text-md font-bold font-Poppins text-titles">
+      <div className="flex flex-col justify-center p-3 mx-4">
+        <table className="table-fixed font-Poppins sm:text-xs md:text-xs">
+          <thead className="text-center">
+            <tr className="text-md font-bold text-dark dark:text-light">
               <th className="px-4 py-2">Day</th>
               <th className="px-4 py-2">Weather</th>
               <th className="px-4 py-2">Temperature</th>
               <th className="px-4 py-2">Precipitation</th>
             </tr>
           </thead>
-          <tbody>{tableRows}</tbody>
+          <tbody className=" text-dark dark:text-light">{tableRows}</tbody>
         </table>
       </div>
     </div>
